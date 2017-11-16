@@ -1,0 +1,37 @@
+// - layout.pug
+doctype html
+html(lang='de') 
+	block link
+		-var selected = 'Startseite';
+	-var menu = { 'Startseite': '/index', 'Zimmer': '/zimmer', 'Gästebuch': '/guestbook', 'Buchen': '/buchen'};
+	head
+		meta(name="viewport" content="width=device-width, initial-scale=1")
+		title #{title} - Pension Biewer Ockfen
+		link(href='/css/style.css', rel='stylesheet')
+		link(href='//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css', rel='stylesheet', integrity='sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb' crossorigin='anonymous')
+		block head
+	body
+		nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top
+			.container
+				a.navbar-brand(href="/") Pension Biewer
+				button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation") 
+					span.navbar-toggler-icon
+				.collapse.navbar-collapse#navbar
+					ul.navbar-nav
+						each val, key in menu
+							if selected === key
+								li.nav-item.active
+									a.nav-link(href=val)=key
+							else
+								li.nav-item
+									a.nav-link(href=val)=key
+		main.container
+			block content
+				h1 #{title}
+			block footer
+			footer.footer.card.card-body.text-center.top3
+				p.my-auto &copy; 2017 #[a(href="https://pension-biewer.de") Pension Biewer] - Design von #[a(href="https://marc-hein.de") Marc Hein] - #[a(href="/impressum") Impressum]
+		script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous")
+		script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous")
+		block scripts

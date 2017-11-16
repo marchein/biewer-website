@@ -1,0 +1,32 @@
+{
+  "name": "biewer-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "lint": "echo '=> linting' && eslint -c ./.eslintrc.json src/js/**.js && eslint -c ./.eslintrc.json server/**.js",
+    "html": "echo '=> creating static html files' && mkdir -p dist && cp webapp/src/index.html dist/",
+    "css": "echo '=> converting less to css' && mkdir -p dist/style && lessc src/style/style.less public/css/style.css",
+    "js": "echo '=> making js files ready for browser' && mkdir -p public/js && cp node_modules/bootstrap/dist/js/bootstrap.min.js public/js/bootstrap.min.js && cp src/js/**.js public/js/",
+    "img": "echo '=> copying the assets' && mkdir -p dist/assets && cp webapp/src/assets/* dist/assets/",
+    "minify": "echo '=> minify all ressources' && babili dist/js/main.js > dist/js/main.min.js && rm dist/js/main.js && mv dist/js/main.min.js dist/js/main.js && mkdir -p dist/style && lessc --clean-css webapp/src/style/style.less dist/style/style.css",
+    "clean": "echo '=> cleaning project' && rm -rf node_modules && rm -rf dist",
+    "build": "echo '=> building project' && npm run lint && npm run html && npm run css && npm run js && npm run img && npm run minify",
+    "debug": "echo '=> building debug project' && npm run lint && npm run html && npm run css && npm run js && npm run img",
+    "start": "echo '=> starting server' && node server/app.js"
+  },
+  "author": "Marc Hein",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2",
+    "pug": "^2.0.0-rc.4"
+  },
+  "devDependencies": {
+    "babel-minify": "latest",
+    "browserify": "latest",
+    "eslint": "latest",
+    "less": "latest",
+    "less-plugin-clean-css": "latest",
+    "bootstrap": "4.0.0-beta.2"
+  }
+}
