@@ -29,8 +29,10 @@ app.get("/zimmer", function (req, res) {
 });
 
 app.get("/guestbook", function (req, res) {
+	var entrys = require("./guestbook");
 	res.render("guestbook", {
-		title: "Gästebuch"
+		title: "Gästebuch",
+		data: Object.values(entrys).reverse()
 	});
 });
 
