@@ -4,8 +4,9 @@ var app = express();
 var port = process.env.PORT || 3000;
 
 app.set('views', 'server/views');
-app.use(express.static('public'));
 app.set('view engine', 'pug');
+
+app.use('/static', express.static('public'));
 
 app.get('/', function(req, res) {
     res.redirect('/index');
