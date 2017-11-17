@@ -2,11 +2,12 @@ var express = require("express");
 const path = require('path');
 var app = express();
 var port = process.env.PORT || 61015;
+var public = path.join(__dirname, '/../public')
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use('/static', express.static('public'));
+app.use('/static', express.static(public));
 
 app.get('/', function(req, res) {
     res.redirect('/index');
