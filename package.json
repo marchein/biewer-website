@@ -7,7 +7,7 @@
     "lint": "echo '=> linting' && eslint -c ./.eslintrc.json src/js/**.js && eslint -c ./.eslintrc.json server/**.js",
     "css": "echo '=> converting less to css' && mkdir -p public/style && lessc src/style/style.less public/css/style.css",
     "js": "echo '=> making js files ready for browser' && mkdir -p public/js && cp node_modules/bootstrap/dist/js/bootstrap.min.js public/js/bootstrap.min.js && cp src/js/**.js public/js/",
-    "img": "echo '=> copying the assets' && mkdir -p public/assets && cp webapp/src/assets/* public/assets/",
+    "img": "echo '=> copying the assets' && mkdir -p public/assets && cp src/assets/* public/assets/",
     "minify": "echo '=> minify all ressources' && babili public/js/main.js > public/js/main.min.js && rm public/js/main.js && mv public/js/main.min.js public/js/main.js && mkdir -p public/style && lessc --clean-css webapp/src/style/style.less public/style/style.css",
     "clean": "echo '=> cleaning project' && rm -rf node_modules && rm -rf public",
     "build": "echo '=> building project' && npm run lint && npm run css && npm run js && npm run img && npm run minify",
