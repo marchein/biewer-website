@@ -28,5 +28,13 @@
     "invariant": "^2.2.2",
     "less": "latest",
     "less-plugin-clean-css": "latest"
-  }
+  },
+  "repository": {
+		"type": "git",
+		"url": "git+https://github.com/marchein/biewer.git"
+	},
+	"bugs": {
+		"url": "https://github.com/marchein/biewer/issues"
+	},
+	"homepage": "https://github.com/marchein/biewer#readme"
 }

@@ -13,13 +13,13 @@ if (app.get("env") === "development") {
 app.use("/static", express.static(publicFolder));
 
 app.get("/", function (req, res) {
-	res.redirect("/index");
-});
-
-app.get("/index", function (req, res) {
 	res.render("home", {
 		title: "Startseite"
 	});
+});
+
+app.get("/index", function (req, res) {
+	res.redirect("/");
 });
 
 app.get("/zimmer", function (req, res) {
