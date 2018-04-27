@@ -18,11 +18,15 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.2",
+    "express-form-post": "^1.4.2",
+    "jquery": "^1.9.1",
+    "moment": "^2.22.1",
+    "popper.js": "^1.14.3",
     "pug": "^2.0.0-rc.4"
   },
   "devDependencies": {
     "babel-minify": "latest",
-    "bootstrap": "4.0.0-beta.2",
+    "bootstrap": "latest",
     "browserify": "latest",
     "eslint": "latest",
     "invariant": "^2.2.2",
@@ -30,11 +34,11 @@
     "less-plugin-clean-css": "latest"
   },
   "repository": {
-		"type": "git",
-		"url": "git+https://github.com/marchein/biewer.git"
-	},
-	"bugs": {
-		"url": "https://github.com/marchein/biewer/issues"
-	},
-	"homepage": "https://github.com/marchein/biewer#readme"
+    "type": "git",
+    "url": "git+https://github.com/marchein/biewer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/marchein/biewer/issues"
+  },
+  "homepage": "https://github.com/marchein/biewer#readme"
 }

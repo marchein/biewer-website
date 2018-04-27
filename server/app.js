@@ -1,8 +1,12 @@
 var express = require("express");
 const path = require("path");
+var moment = require("moment");
+var guestbook = require("./guestbook.js");
 var app = express();
 var port = process.env.PORT || 61015;
 var publicFolder = path.join(__dirname, "/../public");
+var efp = require("express-form-post");
+var formPost = efp();
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
@@ -10,6 +14,9 @@ if (app.get("env") === "development") {
 	app.locals.pretty = true;
 }
 
+guestbook.setupData();
+
+app.use(formPost.middleware());
 app.use("/static", express.static(publicFolder));
 
 app.get("/", function (req, res) {
@@ -29,10 +36,36 @@ app.get("/zimmer", function (req, res) {
 });
 
 app.get("/guestbook", function (req, res) {
-	var entrys = require("./guestbook");
+	res.redirect("/guestbook/1");
+});
+
+app.get("/guestbook/:page", function (req, res) {
+	let currentPage = req.params.page;
+	console.log("page: " + currentPage);
+	// todo add page buttons
+	let entrysOnPage = 5;
 	res.render("guestbook", {
 		title: "Gästebuch",
-		data: Object.values(entrys).reverse()
+		data: Object.values(guestbook.getSpecificEntrys(entrysOnPage, (currentPage - 1) * entrysOnPage)).reverse()
+	});
+});
+
+app.post("/guestbook", function (req, res, next) {
+	formPost.upload(req, res, function (err) {
+		if (err) {
+			console.log(err);
+		}
+		//console.log(req);
+		let nextID = Object.keys(guestbook.getEntrys()).length;
+		let newEntry = {
+			id: nextID,
+			name: req.body.name,
+			ort: req.body.wohnort,
+			datum: moment().format("DD.MM.YYYY HH:mm"),
+			nachricht: req.body.nachricht
+		};
+		guestbook.addEntry(JSON.stringify(newEntry));
+		res.redirect("/guestbook");
 	});
 });
 

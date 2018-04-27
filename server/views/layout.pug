@@ -3,8 +3,8 @@ doctype html
 html(lang='de') 
 	block link
 		-var selected = 'Startseite';
-	//-var menu = { 'Startseite': '/', 'Zimmer': '/zimmer', 'Gästebuch': '/guestbook', 'Buchen': '/buchen'};
-	-var menu = { 'Startseite': '/', 'Zimmer': '/zimmer', 'Gästebuch': 'http://gb.webmart.de/gb.cfm?id=1212428', 'Buchen': '/buchen'};
+	-var menu = { 'Startseite': '/', 'Zimmer': '/zimmer', 'Gästebuch': '/guestbook', 'Buchen': '/buchen'};
+	//-var menu = { 'Startseite': '/', 'Zimmer': '/zimmer', 'Gästebuch': 'http://gb.webmart.de/gb.cfm?id=1212428', 'Buchen': '/buchen'};
 	head
 		meta(name="viewport" content="width=device-width, initial-scale=1")
 		title #{title} - Pension Biewer Ockfen
@@ -37,17 +37,5 @@ html(lang='de')
 		script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous")
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous")
 		script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous")
-		script(type='text/javascript').
-			var _paq = _paq || [];
-			/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
-			_paq.push(['trackPageView']);
-			_paq.push(['enableLinkTracking']);
-			(function() {
-			var u="//piwik.marc-hein.de/";
-			_paq.push(['setTrackerUrl', u+'piwik.php']);
-			_paq.push(['setSiteId', '3']);
-			var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-			g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-			})();
-			// End Piwik Code
+		script(src="https://google.com/recaptcha/api.js")
 		block scripts

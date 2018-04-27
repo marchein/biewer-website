@@ -7,14 +7,42 @@ append content
 	div.alert.alert-success(role="alert")
 		strong Willkommen bei unserem Gästebuch!
 		p Über einen netten Eintrag würden wir uns freuen!
+		a.btn.btn-success.btn-md(href='#form', data-toggle='collapse') G&auml;stebucheintrag schreiben
+
+	div#form.collapse
+		form.form-horizontal(method="post")
+			fieldset
+				// Form Name
+				legend Schreiben Sie einen Eintrag
+				// Text input
+				.form-group
+					label.col-md-12.control-label(for='name') Name
+						.col-md-12
+							input#name.form-control.input-md(name='name', type='text', placeholder='Ihr Name', required='')
+				// Text input
+				.form-group
+					label.col-md-12.control-label(for='wohnort') Wohnort
+						.col-md-12
+							input#wohnort.form-control.input-md(name='wohnort', type='text', placeholder='Ihr Wohnort', required='')
+				// Textarea
+				.form-group
+					label.col-md-12.control-label(for='nachricht') Nachricht
+						.col-md-12
+							textarea#nachricht.form-control(name='nachricht')
+				// Button
+				.form-group
+					label.col-md-12.control-label(for='submit')
+						.col-md-12
+							button#submit.btn.btn-success(name='submit') Speichern
+
 	each obj, index in data
-		.card.top3
-			.card-block
-				.row
-					.col-md-12
-						strong= 'von ' + obj.name + " aus " + obj.ort + " am " + obj.datum
-						p
-							each line in obj.nachricht.split(/\n/)
-								br
-								= line
+			.card.top3
+				.card-block
+					.row
+						.col-md-12
+							strong= 'von ' + obj.name + " aus " + obj.ort + " am " + obj.datum
+							p
+								each line in obj.nachricht.split(/\n/)
+									br
+									= line
 	
