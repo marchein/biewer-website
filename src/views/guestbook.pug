@@ -9,53 +9,41 @@ append content
 			p Über einen netten Eintrag würden wir uns freuen!
 			a.btn.btn-success.btn-md(href='#form', data-toggle='collapse') G&auml;stebucheintrag schreiben
 
-	#form.collapse.top3
-		.card
-			form.form-horizontal(method="post")
-				fieldset
-					// Form Name
-					legend Schreiben Sie einen Eintrag
-					// Text input
-					.form-group.col-md-12
-						label.control-label(for='name') Name
-						input#name.form-control.input-md(name='name', type='text', placeholder='Ihr Name', required='')
-					// Text input
-					.form-group.col-md-12
-						label.control-label(for='wohnort') Wohnort
-						input#wohnort.form-control.input-md(name='wohnort', type='text', placeholder='Ihr Wohnort', required='')
-					// Textarea
-					.form-group.col-md-12
-						label.control-label(for='nachricht') Nachricht
-						textarea#nachricht.form-control(name='nachricht')
-					// Button
-					.form-group.col-md-12
-						label.control-label(for='submit')
-						button#submit.btn.btn-success(name='submit') Speichern
+	#form.collapse.top3.card
+		form.form-horizontal(method="post")
+			.form-group.col-md-12
+				label.control-label(for='name') Name
+				input#name.form-control.input-md(name='name', type='text', placeholder='Ihr Name', required='')
+			.form-group.col-md-12
+				label.control-label(for='wohnort') Wohnort
+				input#wohnort.form-control.input-md(name='wohnort', type='text', placeholder='Ihr Wohnort', required='')
+			.form-group.col-md-12
+				label.control-label(for='nachricht') Nachricht
+				textarea#nachricht.form-control(name='nachricht')
+			.form-group.col-md-12
+				label.control-label(for='submit')
+				button#submit.btn.btn-success(name='submit') Speichern
 
 	each obj, index in data
-			.card.top3
-				.card-block
-					.row
-						.col-md-12
-							strong= 'von ' + obj.name + " aus " + obj.ort + " am " + obj.datum
-							p
-								each line in obj.nachricht.split(/\n/)
-									br
-									= line
+		.card.top3.card-block
+			.row
+				.col-md-12
+					strong= `Von ${obj.name}  aus ${obj.ort} am ${obj.datum}`
+					p
+						each line in obj.nachricht.split(/\n/)
+							= line
+							br
+								
 	
 	.top3.clearfix
 		if (info.hasPreviousPage) 
-			- var prevPage = "/guestbook/" + (info.currentPage - 1)
-			a.btn.btn-primary.float-left(href=prevPage)
-				| Vorherige Seite
+			- var prevPage = "/guestbook/page/" + (info.currentPage - 1)
+			a.btn.btn-primary.float-left(href=prevPage) Vorherige Seite
 		else
-			a.btn.btn-primary.float-left.disabled(href='#')
-				| Vorherige Seite
+			a.btn.btn-primary.float-left.disabled(href='#') Vorherige Seite
 		if (info.hasNextPage)
-			- var nextPage = "/guestbook/" + (info.currentPage + 1)
-			a.btn.btn-primary.float-right(href=nextPage)
-				| Nächste Seite
+			- var nextPage = "/guestbook/page/" + (info.currentPage + 1)
+			a.btn.btn-primary.float-right(href=nextPage) Nächste Seite
 		else	
-			a.btn.btn-primary.float-right.disabled(href="#")
-				| Nächste Seite
+			a.btn.btn-primary.float-right.disabled(href="#") Nächste Seite
 		

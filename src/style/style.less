@@ -1,5 +1,5 @@
 main.container {
-    padding-top: 80px;
+    padding-top: 20px;
 }
 
 .top3 { margin-top:3%; }
@@ -18,6 +18,78 @@ main.container {
     padding-top:15px;
 }
 
-.no-js .collapse { 
-    display: block;
+.mynav {
+    background-image: url("../assets/nav.jpg");
+    background-size: 100% auto;                   /* <------ */
+    background-repeat: no-repeat;
+    background-position: center, top;
+    height: 350px;
+}
+
+.navbar {
+    z-index: 99999;
+    background-color: rgba(0,0,0,0.4);
+    .navbar-brand {
+        font-size: 1.3em;
+    }
+}
+
+@media (max-width: 1920px) {
+    .mynav {
+        background-position: 0px -150px;   
+    }
+}
+
+@media (max-width: 1800px) {
+    .mynav {
+        background-position: 0px -120px;   
+    }
+}
+
+@media (max-width: 1600px) {
+    .mynav {
+        background-position: 0px -90px;   
+    }
+}
+
+@media (max-width: 1300px) {
+    .mynav {
+        background-position: 0px -60px;   
+    }
+}
+
+@media (max-width: 1000px) {
+    .mynav {
+        background-position: 0px -30px;   
+        height: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .mynav {
+        background-position: 0px 0px;   
+        height: 250px;
+    }
+
+    .navbar {
+        background-color: rgba(0,0,0,0.7);
+    }
+}
+
+@media (max-width: 650px) {
+    .mynav {
+        height: 200px;
+        background-position: 0px 20px;   
+    }
+
+    .navbar {
+        background-color: #343a40!important;
+    }
+}
+
+@media (max-width: 500px) {
+    .mynav {
+        height: 200px;
+        background-position: 0px 50px;   
+    }
 }

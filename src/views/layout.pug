@@ -12,22 +12,24 @@ html(lang='de')
 		link(href='/static/css/bootstrap.min.css', rel='stylesheet')
 		link(href='/static/css/bootstrap-datepicker.min.css', rel='stylesheet')
 		link(href='/static/css/font-awesome.min.css', rel='stylesheet')
+		link(href='/static/css/ekko-lightbox.css', rel='stylesheet')
 		block head
 	body
-		nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top
-			.container
-				a.navbar-brand(href="/") Pension Biewer
-				button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation") 
-					span.navbar-toggler-icon
-				.collapse.navbar-collapse#navbar
-					ul.navbar-nav
-						each val, key in menu
-							if selected === key
-								li.nav-item.active
-									a.nav-link(href=val)=key
-							else
-								li.nav-item
-									a.nav-link(href=val)=key
+		.mynav
+			nav.navbar.navbar-expand-md.navbar-dark
+				.container
+					a.navbar-brand(href="/") Pension Biewer
+					button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation") 
+						span.navbar-toggler-icon
+					.collapse.navbar-collapse#navbar
+						ul.navbar-nav
+							each val, key in menu
+								if selected === key
+									li.nav-item.active
+										a.nav-link(href=val)=key
+								else
+									li.nav-item
+										a.nav-link(href=val)=key
 		main.container
 			block content
 				h1 #{title}
@@ -37,6 +39,6 @@ html(lang='de')
 		script(src="/static/js/jquery.slim.min.js")
 		script(src="/static/js/popper.min.js")
 		script(src="/static/js/bootstrap.min.js")
-		link(href='/static/js/bootstrap-datepicker.min.js', rel='stylesheet')
+		script(src="/static/js/ekko-lightbox.js")
 		script(src="/static/js/main.js")
 		block scripts

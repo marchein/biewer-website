@@ -1,6 +1,5 @@
 var express = require("express");
 const path = require("path");
-var moment = require("moment");
 var guestbook = require("./guestbook.js");
 var booking = require("./booking.js");
 var app = express();
@@ -37,10 +36,10 @@ app.get("/zimmer", function (req, res) {
 });
 
 app.get("/guestbook", function (req, res) {
-	res.redirect("/guestbook/1");
+	res.redirect("/guestbook/page/1");
 });
 
-app.get("/guestbook/:page", function (req, res) {
+app.get("/guestbook/page/:page", function (req, res) {
 	let currentPage = req.params.page;
 	let entrysOnPage = 5;
 	let pageStartsAt = guestbook.getNumberOfEntrys() - ((currentPage - 1) * entrysOnPage);
@@ -59,20 +58,12 @@ app.get("/guestbook/:page", function (req, res) {
 	}
 });
 
-app.post("/guestbook/:page", function (req, res) {
+app.post("/guestbook/page/:page", function (req, res) {
 	formPost.upload(req, res, function (err) {
 		if (err) {
 			console.err(err);
 		}
-		let nextID = Object.keys(guestbook.getEntrys()).length;
-		let newEntry = {
-			id: nextID,
-			name: req.body.name,
-			ort: req.body.wohnort,
-			datum: moment().format("DD.MM.YYYY HH:mm"),
-			nachricht: req.body.nachricht
-		};
-		guestbook.addEntry(JSON.stringify(newEntry));
+		guestbook.getNewEntry(req.body);
 		res.redirect("/guestbook");
 	});
 });

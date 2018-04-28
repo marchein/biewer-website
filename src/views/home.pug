@@ -1,8 +1,5 @@
 extends layout.pug
 
-append head
-	link(href='//cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css', rel='stylesheet')
-
 append content
 	.card
 		.card-block
@@ -22,21 +19,11 @@ append content
 		.card-block
 			.row
 				.col-md-4
-					a(href="static/assets/2.jpg" data-toggle="lightbox" data-title="Pension Biewer")
-							img(src="static/assets/2.jpg").img-fluid.img-thumbnail
-				.col-md-4.my-auto.text-center
-					h4 Beispielzimmer
-				.col-md-4
-					a(href="static/assets/3.jpg" data-toggle="lightbox" data-title="Pension Biewer")
-							img(src="static/assets/3.jpg").img-fluid.img-thumbnail
-	.card.top3
-		.card-block
-			.row
-				.col-md-8.my-auto
-					p Wir verfügen über 3 Komfortzimmer, die mit Bad, Dusche WC, Föhn und Kosmetikspiegel ausgestattet sind. Zu jedem Zimmer (ca. 28 m²) gehört eine gemütliche Wohnecke mit SAT-TV, Radio, Kühlschrank, Wasserkocher Trinkgläser usw. 
-				.col-md-4
 					a(href="static/assets/4.jpg" data-toggle="lightbox" data-title="Pension Biewer")
 							img(src="static/assets/4.jpg").img-fluid.img-thumbnail
+				.col-md-8.my-auto
+					p Wir verfügen über 3 Komfortzimmer, die mit Bad, Dusche WC, Föhn und Kosmetikspiegel ausgestattet sind. Zu jedem Zimmer (ca. 28 m²) gehört eine gemütliche Wohnecke mit SAT-TV, Radio, Kühlschrank, Wasserkocher Trinkgläser usw. 
+				
 	.card.top3
 		.card-block
 			.row
@@ -93,11 +80,3 @@ append content
 								| Fax: +49 (0) 6581 92 31 13
 								br
 								| E-Mail: #[a(href="#").biewer-mail Bitte Javascript aktivieren] 
-
-append scripts
-	script(src="//cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js")
-	script.
-		$(document).on('click', '[data-toggle="lightbox"]', function(event) {
-			event.preventDefault();
-			$(this).ekkoLightbox();
-		});

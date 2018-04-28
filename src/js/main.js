@@ -12,6 +12,7 @@ if (biewerEmail !== undefined) {
 	biewerEmail.textContent = mail;
 }
 
-$("#datepicker").datepicker({
-	uiLibrary: "bootstrap4"
+$(document).on("click", '[data-toggle="lightbox"]', function (event) {
+	event.preventDefault();
+	$(this).ekkoLightbox();
 });

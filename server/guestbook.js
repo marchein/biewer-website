@@ -1,4 +1,5 @@
 const fs = require("fs");
+const moment = require("moment");
 const dataPath = "./server/guestbook.json";
 
 let guestbookData = {
@@ -33,6 +34,18 @@ function getSpecificEntrys(numberOfEntrys, startingAt) {
 	}
 }
 
+function getNewEntry(messageBody) {
+	let nextID = Object.keys(getEntrys()).length;
+	let newEntry = {
+		id: nextID,
+		name: messageBody.name,
+		ort: messageBody.wohnort,
+		datum: moment().format("DD.MM.YYYY HH:mm"),
+		nachricht: messageBody.nachricht
+	};
+	addEntry(JSON.stringify(newEntry));
+}
+
 function addEntry(entry) {
 	fs.readFile(dataPath, "utf8", function readFileCallback(err, data) {
 		if (err) {
@@ -49,6 +62,7 @@ module.exports = {
 	setupData,
 	getEntrys,
 	getSpecificEntrys,
+	getNewEntry,
 	addEntry,
 	getNumberOfEntrys: function () {
 		return guestbookData.entrys.length - 1;
