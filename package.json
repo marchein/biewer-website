@@ -8,7 +8,8 @@
     "css": "echo '=> converting less to css' && mkdir -p public/style && lessc src/style/style.less public/css/style.css",
     "js": "echo '=> making js files ready for browser' && mkdir -p public/js && cp node_modules/bootstrap/dist/js/bootstrap.min.js public/js/bootstrap.min.js && cp src/js/**.js public/js/",
     "img": "echo '=> copying the assets' && mkdir -p public/assets && cp src/assets/* public/assets/",
-    "minify": "echo '=> minify all ressources' && minify public/js/main.js > public/js/main.min.js && rm public/js/main.js && mv public/js/main.min.js public/js/main.js && mkdir -p public/style && lessc --clean-css src/style/style.less public/style/style.css",
+    "minify": "echo '=> minify all ressources' && minify public/js/main.js > public/js/main.min.js && rm public/js/main.js && mv public/js/main.min.js public/js/main.js && mkdir -p public/style && lessc --clean-css src/style/style.less public/css/style.css",
+    "dependencies": "echo '=> getting dependencies' && cp node_modules/bootstrap/dist/css/bootstrap.min.css public/css/bootstrap.min.css && cp node_modules/bootstrap/dist/js/bootstrap.min.js public/js/bootstrap.min.js && cp node_modules/jquery/dist/jquery.slim.min.js public/js/jquery.slim.min.js && cp node_modules/popper.js/dist/popper.min.js public/js/popper.min.js && mkdir -p public/fonts && cp -R node_modules/font-awesome/fonts/* public/fonts && cp node_modules/font-awesome/css/font-awesome.min.css public/css/font-awesome.min.css",
     "clean": "echo '=> cleaning project' && rm -rf node_modules && rm -rf public",
     "build": "echo '=> building project' && npm run lint && npm run css && npm run js && npm run img && npm run minify",
     "debug": "echo '=> building debug project' && npm run lint && npm run css && npm run js && npm run img",
@@ -19,6 +20,7 @@
   "dependencies": {
     "express": "^4.16.2",
     "express-form-post": "^1.4.2",
+    "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
     "moment": "^2.22.1",
     "popper.js": "^1.14.3",

@@ -41,16 +41,27 @@ app.get("/guestbook", function (req, res) {
 
 app.get("/guestbook/:page", function (req, res) {
 	let currentPage = req.params.page;
-	console.log("page: " + currentPage);
-	// todo add page buttons
 	let entrysOnPage = 5;
-	res.render("guestbook", {
-		title: "Gästebuch",
-		data: Object.values(guestbook.getSpecificEntrys(entrysOnPage, (currentPage - 1) * entrysOnPage)).reverse()
-	});
+	let pageStartsAt = guestbook.getNumberOfEntrys() - ((currentPage - 1) * entrysOnPage);
+	if (pageStartsAt > 0) {
+		let info = {
+			currentPage: parseInt(currentPage),
+			hasNextPage: guestbook.getNumberOfEntrys() - (currentPage * entrysOnPage) > 0,
+			hasPreviousPage: guestbook.getNumberOfEntrys() !== pageStartsAt
+		};
+
+		res.render("guestbook", {
+			title: "Gästebuch",
+			data: Object.values(guestbook.getSpecificEntrys(entrysOnPage, pageStartsAt)),
+			info: info
+		});
+	}
+	else {
+		res.redirect("/404");
+	}
 });
 
-app.post("/guestbook", function (req, res, next) {
+app.post("/guestbook/:page", function (req, res) {
 	formPost.upload(req, res, function (err) {
 		if (err) {
 			console.log(err);
@@ -83,7 +94,11 @@ app.get("/impressum", function (req, res) {
 
 // Handle 404 error.
 app.use("*", function (req, res) {
-	res.status(404).send("<h1>Error 404 - not found</h1>"); // not found error
+	res.status(404).render("error", {
+		title: "Fehler!",
+		error: 404
+	});
+	//res.status(404).send("<h1>Error 404 - not found</h1>"); // not found error
 });
 
 app.listen(port, function () {

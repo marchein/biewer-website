@@ -1,0 +1,8 @@
+extends layout.pug
+
+append content
+    if (error == 404) 
+        p Error 404 
+        | Seite nicht gefunden
+    else
+        p Sonstiger Fehler!

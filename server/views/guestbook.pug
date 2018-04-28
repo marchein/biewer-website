@@ -4,36 +4,33 @@ block link
 	-var selected = 'Gästebuch';
 
 append content
-	div.alert.alert-success(role="alert")
-		strong Willkommen bei unserem Gästebuch!
-		p Über einen netten Eintrag würden wir uns freuen!
-		a.btn.btn-success.btn-md(href='#form', data-toggle='collapse') G&auml;stebucheintrag schreiben
+	.card
+			strong Willkommen bei unserem Gästebuch!
+			p Über einen netten Eintrag würden wir uns freuen!
+			a.btn.btn-success.btn-md(href='#form', data-toggle='collapse') G&auml;stebucheintrag schreiben
 
-	div#form.collapse
-		form.form-horizontal(method="post")
-			fieldset
-				// Form Name
-				legend Schreiben Sie einen Eintrag
-				// Text input
-				.form-group
-					label.col-md-12.control-label(for='name') Name
-						.col-md-12
-							input#name.form-control.input-md(name='name', type='text', placeholder='Ihr Name', required='')
-				// Text input
-				.form-group
-					label.col-md-12.control-label(for='wohnort') Wohnort
-						.col-md-12
-							input#wohnort.form-control.input-md(name='wohnort', type='text', placeholder='Ihr Wohnort', required='')
-				// Textarea
-				.form-group
-					label.col-md-12.control-label(for='nachricht') Nachricht
-						.col-md-12
-							textarea#nachricht.form-control(name='nachricht')
-				// Button
-				.form-group
-					label.col-md-12.control-label(for='submit')
-						.col-md-12
-							button#submit.btn.btn-success(name='submit') Speichern
+	#form.collapse.top3
+		.card
+			form.form-horizontal(method="post")
+				fieldset
+					// Form Name
+					legend Schreiben Sie einen Eintrag
+					// Text input
+					.form-group.col-md-12
+						label.control-label(for='name') Name
+						input#name.form-control.input-md(name='name', type='text', placeholder='Ihr Name', required='')
+					// Text input
+					.form-group.col-md-12
+						label.control-label(for='wohnort') Wohnort
+						input#wohnort.form-control.input-md(name='wohnort', type='text', placeholder='Ihr Wohnort', required='')
+					// Textarea
+					.form-group.col-md-12
+						label.control-label(for='nachricht') Nachricht
+						textarea#nachricht.form-control(name='nachricht')
+					// Button
+					.form-group.col-md-12
+						label.control-label(for='submit')
+						button#submit.btn.btn-success(name='submit') Speichern
 
 	each obj, index in data
 			.card.top3
@@ -46,3 +43,19 @@ append content
 									br
 									= line
 	
+	.top3.clearfix
+		if (info.hasPreviousPage) 
+			- var prevPage = "/guestbook/" + (info.currentPage - 1)
+			a.btn.btn-primary.float-left(href=prevPage)
+				| Vorherige Seite
+		else
+			a.btn.btn-primary.float-left.disabled(href='#')
+				| Vorherige Seite
+		if (info.hasNextPage)
+			- var nextPage = "/guestbook/" + (info.currentPage + 1)
+			a.btn.btn-primary.float-right(href=nextPage)
+				| Nächste Seite
+		else	
+			a.btn.btn-primary.float-right.disabled(href="#")
+				| Nächste Seite
+		

@@ -25,15 +25,12 @@ function getSpecificEntrys(numberOfEntrys, startingAt) {
 		return guestbookData.entrys;
 	}
 	else {
-		let startValue = startingAt < guestbookData.entrys.length ? startingAt : 0;
 		let data = [];
-
-		for (let i = startValue; i < (startValue + numberOfEntrys); i++) {
+		for (let i = startingAt; i > (startingAt - numberOfEntrys); i--) {
 			if (guestbookData.entrys[i]) {
 				data.push(guestbookData.entrys[i]);
 			}
 		}
-		// todo show last entrys on last page
 		return data;
 	}
 }
@@ -45,10 +42,8 @@ function addEntry(entry) {
 		}
 		else {
 			guestbookData = JSON.parse(data); //now it an object
-			console.log(guestbookData);
 			guestbookData.entrys.push(JSON.parse(entry)); //add some data
-			let json = JSON.stringify(guestbookData); //convert it back to json
-			fs.writeFile(dataPath, json, "utf8", null); // write it back
+			fs.writeFile(dataPath, JSON.stringify(guestbookData), "utf8", setupData); // write it back
 		}
 	});
 }
@@ -57,6 +52,9 @@ module.exports = {
 	setupData,
 	getEntrys,
 	getSpecificEntrys,
-	addEntry
+	addEntry,
+	getNumberOfEntrys: function () {
+		return guestbookData.entrys.length - 1;
+	}
 };
 
