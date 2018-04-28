@@ -93,7 +93,7 @@ function sendMail(res) {
 		Anzahl der Personen: ${res.personen}
 		Nachricht: ${res.nachricht}`
 	};
-	transporter.sendMail(message, function (error, info) {
+	transporter.sendMail(message, function (error) {
 		if (error) {
 			console.err(error);
 		}
