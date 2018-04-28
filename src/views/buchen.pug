@@ -1,0 +1,46 @@
+extends layout.pug
+
+block link
+	-var selected = "Buchen";
+
+append content
+	if message !== undefined
+		if message 
+			.alert.alert-success(role='alert')
+				h4.alert-heading Erfolgreich abgesendet
+				p Ihre Anfrage wurde erfolgreich gesendet, wir melden uns bei Ihnen! Vielen Dank!
+		else
+			.alert.alert-danger(role='alert')
+				h4.alert-heading Fehler beim Absenden
+				p Bitte überprüfen Sie Ihre Eingaben!
+	.card
+		form.form-horizontal(method="post")
+			fieldset
+				.form-group
+					label.control-label.requiredField(for="name") Name
+					input#name.form-control(name="name", placeholder="Ihr Name", type="text")
+				.form-group
+					label.control-label.requiredField(for="email") E-Mail
+					input#email.form-control(name="email", placeholder="Ihre E-Mail Adresse", type="email")
+				.form-group
+					label.control-label.requiredField(for="anreise") Gewünschte Anreise
+					input#anreise.form-control.date(name="anreise", placeholder="Tag/Monat/Jahr", type="date")
+				.form-group
+					label.control-label.requiredField(for="abreise") Gewünschte Abreise
+					input#abreise.form-control(name="abreise", placeholder="Tag/Monat/Jahr", type="date")
+				.form-group
+					label.control-label.requiredField(for="personen") Anzahl der Personen
+					select#personen.select.form-control(name="personen")
+						option(value="1") 1 Person
+						option(value="2") 2 Personen
+				.form-group
+					label.control-label.requiredField(for="zimmer") Welches Zimmer bevorzugen Sie?
+					select#zimmer.select.form-control(name="zimmer")
+						option(value="Zimmer 1 Herrenberg") Zimmer 1 Herrenberg
+						option(value="Zimmer 2 Bockstein") Zimmer 2 Bockstein
+						option(value="Zimmer 3 Geisberg") Zimmer 3 Geisberg
+				.form-group
+					label.control-label.requiredField(for="message") Nachricht
+					textarea#message.form-control(cols="40", name="message", placeholder="Ihre Nachricht", rows="10")
+				.form-group
+					button.btn.btn-primary(name="submit", type="submit") Absenden

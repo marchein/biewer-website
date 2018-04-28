@@ -7,7 +7,8 @@
 		"browser": true,
 		"node": true,
 		"commonjs": true,
-		"es6": true
+		"es6": true,
+		"jquery": true
 	},
 	"extends": "eslint:recommended",
 	"rules": {
@@ -57,7 +58,7 @@
 		"no-unused-vars": "warn",
 		"array-bracket-spacing": "error",
 		"block-spacing": "error",
-		"brace-style": ["error", "stroustrup", { "allowSingleLine": true }],
+		"brace-style": ["error", "1tbs", { "allowSingleLine": true }],
 		"camelcase": "error",
 		"comma-spacing": "error",
 		"comma-style": "error",

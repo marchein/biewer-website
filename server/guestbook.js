@@ -9,8 +9,7 @@ function setupData() {
 	fs.readFile(dataPath, "utf8", function readFileCallback(err, data) {
 		if (err) {
 			console.log(err);
-		}
-		else {
+		} else {
 			guestbookData = JSON.parse(data); //now it an object
 		}
 	});
@@ -23,8 +22,7 @@ function getEntrys() {
 function getSpecificEntrys(numberOfEntrys, startingAt) {
 	if (numberOfEntrys >= guestbookData.entrys.length) {
 		return guestbookData.entrys;
-	}
-	else {
+	} else {
 		let data = [];
 		for (let i = startingAt; i > (startingAt - numberOfEntrys); i--) {
 			if (guestbookData.entrys[i]) {
@@ -39,8 +37,7 @@ function addEntry(entry) {
 	fs.readFile(dataPath, "utf8", function readFileCallback(err, data) {
 		if (err) {
 			console.log(err);
-		}
-		else {
+		} else {
 			guestbookData = JSON.parse(data); //now it an object
 			guestbookData.entrys.push(JSON.parse(entry)); //add some data
 			fs.writeFile(dataPath, JSON.stringify(guestbookData), "utf8", setupData); // write it back

@@ -2,13 +2,14 @@ var express = require("express");
 const path = require("path");
 var moment = require("moment");
 var guestbook = require("./guestbook.js");
+var booking = require("./booking.js");
 var app = express();
 var port = process.env.PORT || 61015;
 var publicFolder = path.join(__dirname, "/../public");
 var efp = require("express-form-post");
 var formPost = efp();
 
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "../src/views"));
 app.set("view engine", "pug");
 if (app.get("env") === "development") {
 	app.locals.pretty = true;
@@ -55,8 +56,7 @@ app.get("/guestbook/:page", function (req, res) {
 			data: Object.values(guestbook.getSpecificEntrys(entrysOnPage, pageStartsAt)),
 			info: info
 		});
-	}
-	else {
+	} else {
 		res.redirect("/404");
 	}
 });
@@ -82,7 +82,17 @@ app.post("/guestbook/:page", function (req, res) {
 
 app.get("/buchen", function (req, res) {
 	res.render("buchen", {
-		title: "Buchen"
+		title: "Buchen",
+		message: undefined
+	});
+});
+
+app.post("/buchen", function (req, res) {
+	let validation = booking.validate(req.body);
+	console.log(validation);
+	res.render("buchen", {
+		title: "Buchen",
+		message: validation.isValid
 	});
 });
 

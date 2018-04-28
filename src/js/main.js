@@ -11,3 +11,7 @@ if (biewerEmail !== undefined) {
 	biewerEmail.href = "mailto:" + mail;
 	biewerEmail.textContent = mail;
 }
+
+$("#datepicker").datepicker({
+	uiLibrary: "bootstrap4"
+});
