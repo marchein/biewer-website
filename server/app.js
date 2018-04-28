@@ -45,16 +45,14 @@ app.get("/guestbook/:page", function (req, res) {
 	let entrysOnPage = 5;
 	let pageStartsAt = guestbook.getNumberOfEntrys() - ((currentPage - 1) * entrysOnPage);
 	if (pageStartsAt > 0) {
-		let info = {
-			currentPage: parseInt(currentPage),
-			hasNextPage: guestbook.getNumberOfEntrys() - (currentPage * entrysOnPage) > 0,
-			hasPreviousPage: guestbook.getNumberOfEntrys() !== pageStartsAt
-		};
-
 		res.render("guestbook", {
 			title: "Gästebuch",
 			data: Object.values(guestbook.getSpecificEntrys(entrysOnPage, pageStartsAt)),
-			info: info
+			info: {
+				currentPage: parseInt(currentPage),
+				hasNextPage: guestbook.getNumberOfEntrys() - (currentPage * entrysOnPage) > 0,
+				hasPreviousPage: guestbook.getNumberOfEntrys() !== pageStartsAt
+			}
 		});
 	} else {
 		res.redirect("/404");
@@ -64,9 +62,8 @@ app.get("/guestbook/:page", function (req, res) {
 app.post("/guestbook/:page", function (req, res) {
 	formPost.upload(req, res, function (err) {
 		if (err) {
-			console.log(err);
+			console.err(err);
 		}
-		//console.log(req);
 		let nextID = Object.keys(guestbook.getEntrys()).length;
 		let newEntry = {
 			id: nextID,
@@ -89,7 +86,9 @@ app.get("/buchen", function (req, res) {
 
 app.post("/buchen", function (req, res) {
 	let validation = booking.validate(req.body);
-	console.log(validation);
+	if (validation.isValid) {
+		booking.sendMail(validation.res);
+	}
 	res.render("buchen", {
 		title: "Buchen",
 		message: validation.isValid

@@ -1,3 +1,18 @@
+var nodemailer = require("nodemailer");
+const config = require("./config.js");
+var moment = require("moment");
+
+const transporter = nodemailer.createTransport({
+	host: config.host,
+	port: config.port,
+	auth: {
+		user: config.auth.user,
+		pass: config.auth.pass
+	}
+});
+
+const PENSION_BIEWER_MAIL = "pensionbiewerockfen@t-online.de";
+
 function validate(message) {
 	let nameIsValid = validateNormalText(message.name);
 	let mailIsValid = validateEmail(message.email);
@@ -12,8 +27,8 @@ function validate(message) {
 		response = {
 			name: message.name,
 			email: message.email,
-			anreise: message.anreise,
-			abreise: message.abreise,
+			anreise: parseDate(message.anreise),
+			abreise: parseDate(message.abreise),
 			personen: message.personen,
 			zimmer: message.zimmer,
 			nachricht: validText.cleanText
@@ -37,9 +52,7 @@ function validateEmail(email) {
 }
 
 function validateDate(date) {
-	var bits = date.split("-");
-	var d = new Date(bits[0], bits[1] - 1, bits[2]); // eslint-disable-next-line
-	return d.getFullYear() == bits[0] && (d.getMonth() + 1) == bits[1] && d.getDate() == Number(bits[2]);
+	return moment(date).isValid();
 }
 
 function validePersons(persons) {
@@ -64,6 +77,30 @@ function removeSpecials(str) {
 	return str.replace(/[<>'"&]/g, "");
 }
 
+function parseDate(date) {
+	moment.locale("de");
+	return moment(date).format("LL");
+}
+
+function sendMail(res) {
+	var message = {
+		from: `${res.name} <${res.email}>`,
+		to: PENSION_BIEWER_MAIL,
+		subject: `Buchungsanfrage von ${res.name} [Von: ${res.anreise} Bis ${res.abreise}]`,
+		text: `Neue Anfrage von ${res.name} für den Zeitraum von ${res.anreise} bis ${res.abreise}.
+		
+		Gewünschtes Zimmer: ${res.zimmer}
+		Anzahl der Personen: ${res.personen}
+		Nachricht: ${res.nachricht}`
+	};
+	transporter.sendMail(message, function (error, info) {
+		if (error) {
+			console.err(error);
+		}
+	});
+}
+
 module.exports = {
-	validate
+	validate,
+	sendMail
 };
