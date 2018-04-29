@@ -4,12 +4,12 @@ block link
 	-var selected = 'Gästebuch';
 
 append content
-	.card
+	.card.card-body
 			strong Willkommen bei unserem Gästebuch!
 			p Über einen netten Eintrag würden wir uns freuen!
-			a.btn.btn-success.btn-md(href='#form', data-toggle='collapse') G&auml;stebucheintrag schreiben
+			a.btn.btn-success.btn-block(href='#form', data-toggle='collapse') G&auml;stebucheintrag schreiben
 
-	#form.collapse.top3.card
+	#form.collapse.top3.card.card-body
 		form.form-horizontal(method="post")
 			.form-group.col-md-12
 				label.control-label(for='name') Name
@@ -22,14 +22,19 @@ append content
 				textarea#nachricht.form-control(name='nachricht' required)
 			.form-group.col-md-12
 				label.control-label(for='submit')
-				button#submit.btn.btn-success(name='submit') Speichern
+				button#submit.btn.btn-success.btn-block(name='submit') Speichern
 
 	each obj, index in data
 		.card.top3.card-block
 			.row
 				.col-md-12
-					strong= `Von ${obj.name}  aus ${obj.ort} am ${obj.datum}`
-					p
+					.card-header Von 
+						strong #{obj.name} 
+						| aus 
+						strong #{obj.ort === "" ? "keine Angabe" : obj.ort} 
+						| am 
+						strong #{obj.datum}
+					.card-body
 						each line in obj.nachricht.split(/\n/)
 							= line
 							br

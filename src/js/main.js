@@ -23,5 +23,12 @@ moment.locale("de");
 var now = moment();
 let today = now.format("YYYY-MM-DD");
 let inFewDays = now.add(moment.duration({ days: 3 })).format("YYYY-MM-DD");
-document.getElementById("anreise").value = today;
-document.getElementById("abreise").value = inFewDays;
+let anreise = document.getElementById("anreise");
+if (anreise !== null) {
+	anreise.value = today;
+}
+let abreise = document.getElementById("abreise");
+if (abreise !== null) {
+	abreise.value = inFewDays;
+}
+

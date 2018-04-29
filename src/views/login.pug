@@ -1,23 +1,30 @@
 extends layout.pug
 
 block link
-	-var selected = 'Datenschutz';
+	-var selected = 'Anmelden';
 
 append content
-	if (!loggedin)
-		.container
-			#form.top3.card
-				form.form-horizontal(method="post")
-					.form-group.col-md-12
-						label.control-label(for='name') Name
-						input#name.form-control.input-md(name='name', type='text', placeholder='Anmeldename', required)
-					.form-group.col-md-12
-						label.control-label(for='password') Passwort
-						input#password.form-control.input-md(name='password', type='password', placeholder='Ihr Passwort', required)
-					.form-group.col-md-12
-						label.control-label(for='submit')
-						button#submit.btn.btn-success(name='submit') Anmelden
+	if (!loggedin.loggedin)
+		.card.card-body
+			form.form-horizontal(method="post")
+				.form-group.col-md-12
+					label.control-label(for='name') Name
+					input#name.form-control.input-md(name='name', type='text', placeholder='Anmeldename', required)
+				.form-group.col-md-12
+					label.control-label(for='password') Passwort
+					input#password.form-control.input-md(name='password', type='password', placeholder='Ihr Passwort', required)
+				.form-group.col-md-12
+					label.control-label(for='submit')
+					button#submit.btn.btn-success.btn-block(name='submit') Anmelden
 	else
-		.card
+		.alert.alert-success.alert-dismissible.fade.show(role="alert") Eingeloggt als 
+			strong #{loggedin.username}
+			| !		
+			button.close(type='button', data-dismiss='alert', aria-label='Close')
+				span(aria-hidden='true') ×
+		.card.card-body
 			.card-block
-				p Erfolgreich angemeldet!
+				a(href="/intern/guestbook/1") Gästebuch verwalten
+		.top1.clearfix
+			a.btn.btn-primary.btn-md.float-left(href="mailto:info@marc-hein.de") Admin kontaktieren
+			a.btn.btn-danger.btn-md.float-right(href="/logout") Abmelden

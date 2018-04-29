@@ -58,14 +58,47 @@ function addEntry(entry) {
 	});
 }
 
+function deleteEntry(id) {
+	let validate = validEntry(id);
+	if (validate.result) {
+		let index = validate.position;
+		if (index > -1) {
+			console.log("entry with id " + id + " deleted!");
+			console.log("position: " + validate.position);
+			guestbookData.entrys.splice(index, 1);
+			fs.writeFile(dataPath, JSON.stringify(guestbookData), "utf8", setupData); // write it back
+		}
+	} else {
+		console.log("falsche id!");
+	}
+}
+
+function validEntry(id) {
+	for (let i = 0; i <= getNumberOfEntrys(); i++) {
+		if (Number(guestbookData.entrys[i].id) === Number(id)) {
+			return {
+				result: true,
+				position: i
+			};
+		}
+	}
+	return {
+		result: false,
+		position: -1
+	};
+}
+
+function getNumberOfEntrys() {
+	return guestbookData.entrys.length - 1;
+}
+
 module.exports = {
 	setupData,
 	getEntrys,
 	getSpecificEntrys,
 	getNewEntry,
 	addEntry,
-	getNumberOfEntrys: function () {
-		return guestbookData.entrys.length - 1;
-	}
+	deleteEntry,
+	getNumberOfEntrys
 };
 

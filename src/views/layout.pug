@@ -3,7 +3,7 @@ doctype html
 html(lang='de') 
 	block link
 		-var selected = 'Startseite';
-	-var menu = { 'Startseite': '/', 'Zimmer': '/zimmer','Buchen': '/buchen', 'Gästebuch': '/guestbook'};
+	-var menu = { 'Startseite': '/', 'Zimmer': '/zimmer','Umgebung': '/umgebung', 'Buchen': '/buchen', 'Gästebuch': '/guestbook'};
 	head
 		meta(name="viewport" content="width=device-width, initial-scale=1")
 		title #{title} - Pension Biewer Ockfen
@@ -16,7 +16,7 @@ html(lang='de')
 		.mynav
 			nav.navbar.navbar-expand-md.navbar-dark
 				.container
-					a.navbar-brand(href="/") Pension Biewer
+					a.navbar-brand(href="/") #{owner.name}
 					button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation") 
 						span.navbar-toggler-icon
 					.collapse.navbar-collapse#navbar
@@ -33,9 +33,9 @@ html(lang='de')
 				h1 #{title}
 			block footer
 			footer.footer.card.card-body.text-center.top3
-				p.my-auto #[a(href="/impressum") Impressum] - #[a(href="/datenschutz") Datenschutz] - #[a(href="/login") Anmelden]
-				p.my-auto Design von #[a(href="https://marc-hein.de") Marc Hein]
-				p.my-auto &copy; 2018 #[a(href="https://pension-biewer.de") Pension Biewer]
+				p.my-auto #[a(href="/impressum") Impressum] - #[a(href="/datenschutz") Datenschutz] - #[a(href="/login") Intern]
+				p.my-auto Design von #[a(href=author.site) #{author.name}]
+				p.my-auto &copy; #{site.currentYear} #[a(href=owner.site) #{owner.name}]
 		script(src="/static/js/jquery.slim.min.js")
 		script(src="/static/js/popper.min.js")
 		script(src="/static/js/bootstrap.min.js")

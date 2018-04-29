@@ -1,0 +1,14 @@
+extends layout.pug
+
+block link
+	-var selected = 'Umgebung';
+
+append content
+		.card
+			.card-block
+				.row
+					- for (var i = 0; i < 10; ++i) {
+						.col-md-6.col-lg-4
+							a(href="static/assets/zimmer1/zimmer_1_herrenberg_1.jpg" data-toggle="lightbox" data-title="Pension Biewer")
+									img(src="static/assets/zimmer1/zimmer_1_herrenberg_1.jpg").img-fluid.img-thumbnail
+					- }

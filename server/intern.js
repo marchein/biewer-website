@@ -1,17 +1,15 @@
 const config = require("./config.js").USERS;
+const bcrypt = require("bcrypt");
 
 function validateLogin(data) {
-	let success = false;
 	for (var key in config) {
-		if (config[key].username === data.name) {
-			if (config[key].password === data.password) {
-				success = true;
-			}
+		if (config[key].username === (data.name).toLowerCase()) {
+			return bcrypt.compareSync(data.password, config[key].password);
 		}
 	}
-	return success;
+	return false;
 }
 
 module.exports = {
-	validateLogin
+	validateLogin,
 };

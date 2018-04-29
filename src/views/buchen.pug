@@ -13,7 +13,7 @@ append content
 			.alert.alert-danger(role='alert')
 				h4.alert-heading Fehler beim Absenden
 				p.mb-0 Bitte überprüfen Sie Ihre Eingaben!
-	.card
+	.card.card-body
 		form.form-horizontal(method="post")
 			fieldset
 				.form-group
@@ -43,4 +43,4 @@ append content
 					label.control-label.requiredField(for="message") Nachricht
 					textarea#message.form-control(cols="40", name="message", placeholder="Ihre Nachricht", rows="10")
 				.form-group
-					button.btn.btn-success(name="submit", type="submit") Absenden
+					button.btn.btn-success.btn-block(name="submit", type="submit") Absenden
