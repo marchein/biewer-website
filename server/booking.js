@@ -1,5 +1,5 @@
 var nodemailer = require("nodemailer");
-const config = require("./config.js");
+const config = require("./config.js").MAIL_OPTIONS;
 var moment = require("moment");
 
 const transporter = nodemailer.createTransport({

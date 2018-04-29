@@ -18,16 +18,16 @@ append content
 			fieldset
 				.form-group
 					label.control-label.requiredField(for="name") Name
-					input#name.form-control(name="name", placeholder="Ihr Name", type="text")
+					input#name.form-control(name="name", placeholder="Ihr Name", type="text" required)
 				.form-group
 					label.control-label.requiredField(for="email") E-Mail
-					input#email.form-control(name="email", placeholder="Ihre E-Mail Adresse", type="email")
+					input#email.form-control(name="email", placeholder="Ihre E-Mail Adresse", type="email" required)
 				.form-group
 					label.control-label.requiredField(for="anreise") Gewünschte Anreise
-					input#anreise.form-control.date(name="anreise", placeholder="Tag/Monat/Jahr", type="date")
+					input#anreise.form-control.date(name="anreise", placeholder="Tag.Monat.Jahr", type="date" required)
 				.form-group
 					label.control-label.requiredField(for="abreise") Gewünschte Abreise
-					input#abreise.form-control(name="abreise", placeholder="Tag/Monat/Jahr", type="date")
+					input#abreise.form-control(name="abreise", placeholder="Tag.Monat.Jahr", type="date" required)
 				.form-group
 					label.control-label.requiredField(for="personen") Anzahl der Personen
 					select#personen.select.form-control(name="personen")
@@ -43,4 +43,4 @@ append content
 					label.control-label.requiredField(for="message") Nachricht
 					textarea#message.form-control(cols="40", name="message", placeholder="Ihre Nachricht", rows="10")
 				.form-group
-					button.btn.btn-primary(name="submit", type="submit") Absenden
+					button.btn.btn-success(name="submit", type="submit") Absenden

@@ -2,6 +2,7 @@ var express = require("express");
 const path = require("path");
 var guestbook = require("./guestbook.js");
 var booking = require("./booking.js");
+var intern = require("./intern.js");
 var app = express();
 var port = process.env.PORT || 61015;
 var publicFolder = path.join(__dirname, "/../public");
@@ -89,6 +90,28 @@ app.post("/buchen", function (req, res) {
 app.get("/impressum", function (req, res) {
 	res.render("impressum", {
 		title: "Impressum"
+	});
+});
+
+app.get("/datenschutz", function (req, res) {
+	res.render("datenschutz", {
+		title: "Datenschutzerklärung"
+	});
+});
+
+app.get("/login", function (req, res) {
+	res.render("login", {
+		title: "Anmelden",
+		loggedin: false
+	});
+});
+
+app.post("/login", function (req, res) {
+	let loggedin = intern.validateLogin(req.body);
+
+	res.render("login", {
+		title: loggedin ? "Interner Bereich" : "Anmelden",
+		loggedin: loggedin
 	});
 });
 

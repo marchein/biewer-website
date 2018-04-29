@@ -13,13 +13,13 @@ append content
 		form.form-horizontal(method="post")
 			.form-group.col-md-12
 				label.control-label(for='name') Name
-				input#name.form-control.input-md(name='name', type='text', placeholder='Ihr Name', required='')
+				input#name.form-control.input-md(name='name', type='text', placeholder='Ihr Name', required)
 			.form-group.col-md-12
 				label.control-label(for='wohnort') Wohnort
-				input#wohnort.form-control.input-md(name='wohnort', type='text', placeholder='Ihr Wohnort', required='')
+				input#wohnort.form-control.input-md(name='wohnort', type='text', placeholder='Ihr Wohnort', required)
 			.form-group.col-md-12
 				label.control-label(for='nachricht') Nachricht
-				textarea#nachricht.form-control(name='nachricht')
+				textarea#nachricht.form-control(name='nachricht' required)
 			.form-group.col-md-12
 				label.control-label(for='submit')
 				button#submit.btn.btn-success(name='submit') Speichern

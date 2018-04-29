@@ -1,0 +1,23 @@
+extends layout.pug
+
+block link
+	-var selected = 'Datenschutz';
+
+append content
+	if (!loggedin)
+		.container
+			#form.top3.card
+				form.form-horizontal(method="post")
+					.form-group.col-md-12
+						label.control-label(for='name') Name
+						input#name.form-control.input-md(name='name', type='text', placeholder='Anmeldename', required)
+					.form-group.col-md-12
+						label.control-label(for='password') Passwort
+						input#password.form-control.input-md(name='password', type='password', placeholder='Ihr Passwort', required)
+					.form-group.col-md-12
+						label.control-label(for='submit')
+						button#submit.btn.btn-success(name='submit') Anmelden
+	else
+		.card
+			.card-block
+				p Erfolgreich angemeldet!

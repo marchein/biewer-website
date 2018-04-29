@@ -1,3 +1,5 @@
+const moment = require("moment");
+
 let marcEmail = document.getElementsByClassName("marc-mail")[0];
 if (marcEmail !== undefined) {
 	let mail = "kontakt@marc-hein.de";
@@ -16,3 +18,10 @@ $(document).on("click", '[data-toggle="lightbox"]', function (event) {
 	event.preventDefault();
 	$(this).ekkoLightbox();
 });
+
+moment.locale("de");
+var now = moment();
+let today = now.format("YYYY-MM-DD");
+let inFewDays = now.add(moment.duration({ days: 3 })).format("YYYY-MM-DD");
+document.getElementById("anreise").value = today;
+document.getElementById("abreise").value = inFewDays;
