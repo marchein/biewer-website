@@ -1,13 +1,34 @@
-var nodemailer = require("nodemailer");
-const config = require("./config.js").MAIL_OPTIONS;
-var moment = require("moment");
+const fs = require("fs");
+const winston = require("winston");
+const nodemailer = require("nodemailer");
+const config = require("./config.js");
+const moment = require("moment");
+
+if (!fs.existsSync(config.LOG_FOLDER)) {
+	fs.mkdirSync(config.LOG_FOLDER);
+}
+
+var logger = new (winston.Logger)({
+	transports: [
+		new (winston.transports.File)({
+			name: "info-file",
+			filename: config.LOG_FOLDER + "/server.log",
+			level: "info"
+		}),
+		new (winston.transports.File)({
+			name: "error-file",
+			filename: config.LOG_FOLDER + "/errors.log",
+			level: "error"
+		})
+	]
+});
 
 const transporter = nodemailer.createTransport({
-	host: config.host,
-	port: config.port,
+	host: config.MAIL_OPTIONS.host,
+	port: config.MAIL_OPTIONS.port,
 	auth: {
-		user: config.auth.user,
-		pass: config.auth.pass
+		user: config.MAIL_OPTIONS.auth.user,
+		pass: config.MAIL_OPTIONS.auth.pass
 	}
 });
 
@@ -95,7 +116,7 @@ function sendMail(res) {
 	};
 	transporter.sendMail(message, function (error) {
 		if (error) {
-			console.err(error);
+			logger.error(error);
 		}
 	});
 }

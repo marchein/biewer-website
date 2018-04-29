@@ -2,19 +2,42 @@ const express = require("express");
 const session = require("express-session");
 const efp = require("express-form-post");
 const path = require("path");
+const winston = require("winston");
+const fs = require("fs");
 const guestbook = require("./guestbook.js");
 const booking = require("./booking.js");
 const intern = require("./intern.js");
+const config = require("./config.js");
 const app = express();
 const formPost = efp();
-const port = process.env.PORT || 61015;
+const port = process.env.PORT || config.EXPRESS_PORT;
 const publicFolder = path.join(__dirname, "/../public");
+
+if (!fs.existsSync(config.LOG_FOLDER)) {
+	fs.mkdirSync(config.LOG_FOLDER);
+}
+
+var logger = new (winston.Logger)({
+	transports: [
+		new (winston.transports.File)({
+			name: "info-file",
+			filename: config.LOG_FOLDER + "/server.log",
+			level: "info"
+		}),
+		new (winston.transports.File)({
+			name: "error-file",
+			filename: config.LOG_FOLDER + "/errors.log",
+			level: "error"
+		})
+	]
+});
 
 app.set("views", path.join(__dirname, "../src/views"));
 app.set("view engine", "pug");
 if (app.get("env") === "development") {
 	app.locals.pretty = true;
 }
+logger.info("Setting up page rendering");
 
 app.use((req, res, next) => {
 	res.locals = {
@@ -33,6 +56,7 @@ app.use((req, res, next) => {
 	};
 	next();
 });
+logger.info("Setting local variables");
 
 app.use(session({
 	secret: "nevergonnagiveyouup",
@@ -40,8 +64,10 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true
 }));
+logger.info("Setting up sessions");
 
 guestbook.setupData();
+logger.info("Setting up guestbook content");
 
 app.use(formPost.middleware());
 app.use("/static", express.static(publicFolder));
@@ -94,9 +120,10 @@ app.get("/guestbook/page/:page", function (req, res) {
 app.post("/guestbook/page/:page", function (req, res) {
 	formPost.upload(req, res, function (err) {
 		if (err) {
-			console.log(err);
+			logger.error(err);
 		}
 		guestbook.getNewEntry(req.body);
+		logger.info("Added new guestbook entry");
 		res.redirect("/guestbook");
 	});
 });
@@ -112,6 +139,7 @@ app.post("/buchen", function (req, res) {
 	let validation = booking.validate(req.body);
 	if (validation.isValid) {
 		booking.sendMail(validation.res);
+		logger.info("Booking mail is send");
 	}
 	res.render("buchen", {
 		title: "Buchen",
@@ -134,11 +162,13 @@ app.get("/datenschutz", function (req, res) {
 app.get("/intern", function (req, res) {
 	let loggedIn = req.session.loggedin;
 	if (loggedIn) {
+		logger.info("Successfull login");
 		res.render("login", {
 			title: "Interner Bereich",
 			loggedin: req.session
 		});
 	} else {
+		logger.error("Unseccessfull try to login");
 		res.redirect("/login");
 	}
 });
@@ -163,6 +193,7 @@ app.get("/intern/guestbook/:page", function (req, res) {
 			res.redirect("/404");
 		}
 	} else {
+		logger.error("Unseccessfull try to go to the guestbook administration");
 		res.redirect("/login");
 	}
 });
@@ -177,6 +208,7 @@ app.get("/intern/guestbook/delete/:id", function (req, res) {
 			res.redirect("/404");
 		}*/
 	} else {
+		logger.error("Unseccessfull try to delete entry");
 		res.redirect("/login");
 	}
 });
@@ -199,8 +231,10 @@ app.post("/login", function (req, res) {
 	if (loggedin) {
 		sess.username = capitalizeFirstLetter((req.body.name).toLowerCase());
 		sess.loggedin = loggedin;
+		logger.info(sess.username + " successfully logged in");
 		res.redirect("/intern");
 	} else {
+		logger.error("Unseccessfull try to login by user: " + req.body.name);
 		res.redirect("/login");
 	}
 });
@@ -208,8 +242,9 @@ app.post("/login", function (req, res) {
 app.get("/logout", function (req, res) {
 	req.session.destroy(function (err) {
 		if (err) {
-			console.log(err);
+			logger.error(err);
 		} else {
+			logger.info("User logged out");
 			res.redirect("/");
 		}
 	});
@@ -225,6 +260,7 @@ app.use("*", function (req, res) {
 });
 
 app.listen(port, function () {
+	logger.info("Express server running on port: " + port);
 	console.log("Server running on port: " + port);
 });
 

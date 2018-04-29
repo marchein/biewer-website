@@ -1,15 +1,36 @@
 const fs = require("fs");
 const moment = require("moment");
+const winston = require("winston");
 const dataPath = "./server/guestbook.json";
+const config = require("./config.js");
 
 let guestbookData = {
 	entrys: []
 };
 
+if (!fs.existsSync(config.LOG_FOLDER)) {
+	fs.mkdirSync(config.LOG_FOLDER);
+}
+
+var logger = new (winston.Logger)({
+	transports: [
+		new (winston.transports.File)({
+			name: "info-file",
+			filename: config.LOG_FOLDER + "/server.log",
+			level: "info"
+		}),
+		new (winston.transports.File)({
+			name: "error-file",
+			filename: config.LOG_FOLDER + "/errors.log",
+			level: "error"
+		})
+	]
+});
+
 function setupData() {
 	fs.readFile(dataPath, "utf8", function readFileCallback(err, data) {
 		if (err) {
-			console.log(err);
+			logger.error(err);
 		} else {
 			guestbookData = JSON.parse(data); //now it an object
 		}
@@ -49,7 +70,7 @@ function getNewEntry(messageBody) {
 function addEntry(entry) {
 	fs.readFile(dataPath, "utf8", function readFileCallback(err, data) {
 		if (err) {
-			console.log(err);
+			logger.error(err);
 		} else {
 			guestbookData = JSON.parse(data); //now it an object
 			guestbookData.entrys.push(JSON.parse(entry)); //add some data
@@ -58,18 +79,17 @@ function addEntry(entry) {
 	});
 }
 
-function deleteEntry(id) {
+function deleteEntry(id, logger) {
 	let validate = validEntry(id);
 	if (validate.result) {
 		let index = validate.position;
 		if (index > -1) {
-			console.log("entry with id " + id + " deleted!");
-			console.log("position: " + validate.position);
 			guestbookData.entrys.splice(index, 1);
 			fs.writeFile(dataPath, JSON.stringify(guestbookData), "utf8", setupData); // write it back
+			logger.info("Successfully deleted entry: " + id);
 		}
 	} else {
-		console.log("falsche id!");
+		logger.error("Cannot delete entry with id " + id);
 	}
 }
 
