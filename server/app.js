@@ -204,9 +204,6 @@ app.get("/intern/guestbook/delete/:id", function (req, res) {
 		let entryToBeDeleted = req.params.id;
 		guestbook.deleteEntry(entryToBeDeleted);
 		res.redirect("/intern/guestbook/1");
-		/*} else {
-			res.redirect("/404");
-		}*/
 	} else {
 		logger.error("Unseccessfull try to delete entry");
 		res.redirect("/login");

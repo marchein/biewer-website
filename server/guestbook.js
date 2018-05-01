@@ -79,7 +79,7 @@ function addEntry(entry) {
 	});
 }
 
-function deleteEntry(id, logger) {
+function deleteEntry(id) {
 	let validate = validEntry(id);
 	if (validate.result) {
 		let index = validate.position;
