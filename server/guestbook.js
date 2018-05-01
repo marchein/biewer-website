@@ -56,14 +56,13 @@ function getSpecificEntrys(numberOfEntrys, startingAt) {
 
 function getNewEntry(messageBody) {
 	let nextID = Object.keys(getEntrys()).length;
-	let newEntry = {
+	addEntry(JSON.stringify({
 		id: nextID,
 		name: messageBody.name,
 		ort: messageBody.wohnort,
 		datum: moment().format("DD.MM.YYYY HH:mm"),
 		nachricht: messageBody.nachricht
-	};
-	addEntry(JSON.stringify(newEntry));
+	}));
 }
 
 function addEntry(entry) {
