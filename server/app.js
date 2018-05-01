@@ -1,6 +1,8 @@
 const express = require("express");
 const session = require("express-session");
 const efp = require("express-form-post");
+var bodyParser = require("body-parser");
+var Recaptcha = require("express-recaptcha").Recaptcha;
 const path = require("path");
 const winston = require("winston");
 const fs = require("fs");
@@ -12,6 +14,8 @@ const app = express();
 const formPost = efp();
 const port = process.env.PORT || config.EXPRESS_PORT;
 const publicFolder = path.join(__dirname, "/../public");
+
+var recaptcha = new Recaptcha("6LdhA1YUAAAAAAkfDJrJ4rYREXUxqi9Ewgpl9LHe", "6LdhA1YUAAAAACWtfMOblz53SxjnJ_rtHhqBtP9g");
 
 if (!fs.existsSync(config.LOG_FOLDER)) {
 	fs.mkdirSync(config.LOG_FOLDER);
@@ -31,6 +35,9 @@ var logger = new (winston.Logger)({
 		})
 	]
 });
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set("views", path.join(__dirname, "../src/views"));
 app.set("view engine", "pug");
@@ -110,7 +117,8 @@ app.get("/guestbook/page/:page", function (req, res) {
 				currentPage: parseInt(currentPage),
 				hasNextPage: guestbook.getNumberOfEntrys() - (currentPage * entrysOnPage) >= 0,
 				hasPreviousPage: guestbook.getNumberOfEntrys() !== pageStartsAt
-			}
+			},
+			captcha: recaptcha.render()
 		});
 	} else {
 		res.redirect("/404");
@@ -118,13 +126,20 @@ app.get("/guestbook/page/:page", function (req, res) {
 });
 
 app.post("/guestbook/page/:page", function (req, res) {
-	formPost.upload(req, res, function (err) {
-		if (err) {
-			logger.error(err);
+	recaptcha.verify(req, function (error, data) {
+		if (!error) {
+			formPost.upload(req, res, function (err) {
+				if (err) {
+					logger.error(err);
+				}
+				guestbook.getNewEntry(req.body);
+				logger.info("Added new guestbook entry");
+				res.redirect("/guestbook");
+			});
+		} else {
+			logger.error("Recaptcha failed");
+			res.redirect("/guestbook");
 		}
-		guestbook.getNewEntry(req.body);
-		logger.info("Added new guestbook entry");
-		res.redirect("/guestbook");
 	});
 });
 
@@ -136,14 +151,20 @@ app.get("/buchen", function (req, res) {
 });
 
 app.post("/buchen", function (req, res) {
-	let validation = booking.validate(req.body);
-	if (validation.isValid) {
-		booking.sendMail(validation.res);
-		logger.info("Booking mail is send");
-	}
-	res.render("buchen", {
-		title: "Buchen",
-		message: validation.isValid
+	recaptcha.verify(req, function (error, data) {
+		if (!error) {
+			let validation = booking.validate(req.body);
+			if (validation.isValid) {
+				booking.sendMail(validation.res);
+				logger.info("Booking mail is send");
+			}
+			res.render("buchen", {
+				title: "Buchen",
+				message: validation.isValid
+			});
+		} else {
+			res.redirect("/buchen");
+		}
 	});
 });
 
@@ -223,17 +244,24 @@ app.get("/login", function (req, res) {
 });
 
 app.post("/login", function (req, res) {
-	let loggedin = intern.validateLogin(req.body);
-	let sess = req.session;
-	if (loggedin) {
-		sess.username = capitalizeFirstLetter((req.body.name).toLowerCase());
-		sess.loggedin = loggedin;
-		logger.info(sess.username + " successfully logged in");
-		res.redirect("/intern");
-	} else {
-		logger.error("Unseccessfull try to login by user: " + req.body.name);
-		res.redirect("/login");
-	}
+	recaptcha.verify(req, function (error, data) {
+		if (!error) {
+			let loggedin = intern.validateLogin(req.body);
+			let sess = req.session;
+			if (loggedin) {
+				sess.username = capitalizeFirstLetter((req.body.name).toLowerCase());
+				sess.loggedin = loggedin;
+				logger.info(sess.username + " successfully logged in");
+				res.redirect("/intern");
+			} else {
+				logger.error("Unseccessfull try to login by user: " + req.body.name);
+				res.redirect("/login");
+			}
+		} else {
+			logger.error("Captcha doesnt match up!");
+			res.redirect("/login");
+		}
+	});
 });
 
 app.get("/logout", function (req, res) {

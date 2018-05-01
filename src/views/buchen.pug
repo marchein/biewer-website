@@ -44,4 +44,8 @@ append content
 					label.control-label.requiredField(for="message") Nachricht
 					textarea#message.form-control(cols="40", name="message", placeholder="Ihre Nachricht", rows="10")
 				.form-group
+					label.control-label(for='captcha') Captcha
+					script(src="//www.google.com/recaptcha/api.js" async defer)
+					#captcha.g-recaptcha(data-sitekey="6LdhA1YUAAAAAAkfDJrJ4rYREXUxqi9Ewgpl9LHe")
+				.form-group
 					button.btn.btn-success.btn-block(name="submit", type="submit") Absenden
