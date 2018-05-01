@@ -32,7 +32,8 @@ append content
 					label.control-label.requiredField(for="personen") Anzahl der Personen
 					select#personen.select.form-control(name="personen")
 						option(value="1") 1 Person
-						option(value="2") 2 Personen
+						- for (let i = 2; i <= 6; i++ )
+							option(value=i) #{i} Personen
 				.form-group
 					label.control-label.requiredField(for="zimmer") Welches Zimmer bevorzugen Sie?
 					select#zimmer.select.form-control(name="zimmer")

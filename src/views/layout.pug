@@ -3,7 +3,8 @@ doctype html
 html(lang='de') 
 	block link
 		-var selected = 'Startseite';
-	-var menu = { 'Startseite': '/', 'Zimmer': '/zimmer','Umgebung': '/umgebung', 'Buchen': '/buchen', 'Gästebuch': '/guestbook'};
+	//-var menu = { 'Startseite': '/', 'Zimmer': '/zimmer','Umgebung': '/umgebung', 'Buchen': '/buchen', 'Gästebuch': '/guestbook'};
+	-var menu = { 'Startseite': '/', 'Zimmer': '/zimmer', 'Buchen': '/buchen', 'Gästebuch': '/guestbook'};
 	head
 		meta(name="viewport" content="width=device-width, initial-scale=1")
 		title #{title} - Pension Biewer Ockfen
@@ -16,6 +17,11 @@ html(lang='de')
 		.mynav
 			nav.navbar.navbar-expand-md.navbar-dark
 				.container
+					.navbar-brand
+						i.fa.fa-star
+						i.fa.fa-star
+						i.fa.fa-star
+						i.fa.fa-star
 					a.navbar-brand(href="/") #{owner.name}
 					button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation") 
 						span.navbar-toggler-icon
@@ -30,7 +36,11 @@ html(lang='de')
 										a.nav-link(href=val)=key
 		main.container
 			block content
-				h1 #{title}
+				if title == "Startseite"
+					h1 #{title} 
+						small.text-muted 4-Sterne Pension Biewer
+				else
+					h1 #{title}
 			block footer
 			footer.footer.card.card-body.text-center.top3
 				p.my-auto #[a(href="/impressum") Impressum] - #[a(href="/datenschutz") Datenschutz] - #[a(href="/login") Intern]
