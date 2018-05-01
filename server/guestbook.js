@@ -1,7 +1,6 @@
 const fs = require("fs");
 const moment = require("moment");
 const winston = require("winston");
-const dataPath = "./server/guestbook.json";
 const config = require("./config.js");
 
 let guestbookData = {
@@ -28,7 +27,7 @@ var logger = new (winston.Logger)({
 });
 
 function setupData() {
-	fs.readFile(dataPath, "utf8", function readFileCallback(err, data) {
+	fs.readFile(config.GUESTBOOK_DATA, "utf8", function readFileCallback(err, data) {
 		if (err) {
 			logger.error(err);
 		} else {
@@ -68,13 +67,13 @@ function getNewEntry(messageBody) {
 }
 
 function addEntry(entry) {
-	fs.readFile(dataPath, "utf8", function readFileCallback(err, data) {
+	fs.readFile(config.GUESTBOOK_DATA, "utf8", function readFileCallback(err, data) {
 		if (err) {
 			logger.error(err);
 		} else {
 			guestbookData = JSON.parse(data); //now it an object
 			guestbookData.entrys.push(JSON.parse(entry)); //add some data
-			fs.writeFile(dataPath, JSON.stringify(guestbookData), "utf8", setupData); // write it back
+			fs.writeFile(config.GUESTBOOK_DATA, JSON.stringify(guestbookData), "utf8", setupData); // write it back
 		}
 	});
 }
@@ -85,7 +84,7 @@ function deleteEntry(id) {
 		let index = validate.position;
 		if (index > -1) {
 			guestbookData.entrys.splice(index, 1);
-			fs.writeFile(dataPath, JSON.stringify(guestbookData), "utf8", setupData); // write it back
+			fs.writeFile(config.GUESTBOOK_DATA, JSON.stringify(guestbookData), "utf8", setupData); // write it back
 			logger.info("Successfully deleted entry: " + id);
 		}
 	} else {
