@@ -38,16 +38,7 @@ html(lang='de')
 										a.nav-link(href=val)=key
 		main.container
 			block content
-				if title == "Startseite"
-					h1 #{title} 
-						small.text-muted 
-							i.fa.fa-star
-							i.fa.fa-star
-							i.fa.fa-star
-							i.fa.fa-star
-							|  Pension Biewer
-				else
-					h1 #{title}
+				h1 #{title}
 			block footer
 			footer.footer.card.card-body.text-center.top3
 				p.my-auto #[a(href="/impressum") Impressum] - #[a(href="/datenschutz") Datenschutz] - #[a(href="/login") Intern]
