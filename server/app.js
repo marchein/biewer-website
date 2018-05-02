@@ -176,7 +176,7 @@ app.get("/impressum", function (req, res) {
 
 app.get("/datenschutz", function (req, res) {
 	res.render("datenschutz", {
-		title: "Datenschutzerklärung"
+		title: "Datenschutz"
 	});
 });
 

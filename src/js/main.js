@@ -32,3 +32,24 @@ if (abreise !== null) {
 	abreise.value = inFewDays;
 }
 
+window.addEventListener("load", function () {
+	window.cookieconsent.initialise({
+		palette: {
+			popup: {
+				background: "#343a40"
+			},
+			button: {
+				background: "#007bff"
+			}
+		},
+		theme: "edgeless",
+		position: "bottom",
+		static: true,
+		content: {
+			message: "Diese Website nutzt Cookies, um bestmögliche Funktionalität bieten zu können.",
+			dismiss: "Verstanden",
+			link: "Mehr Informationen",
+			href: "https://pension-biewer.de/datenschutz"
+		}
+	});
+});
