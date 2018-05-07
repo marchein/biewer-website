@@ -26,9 +26,11 @@ var logger = new (winston.Logger)({
 const transporter = nodemailer.createTransport({
 	host: config.MAIL_OPTIONS.host,
 	port: config.MAIL_OPTIONS.port,
+	secure: true,
 	auth: {
-		user: config.MAIL_OPTIONS.auth.user,
-		pass: config.MAIL_OPTIONS.auth.pass
+		type: config.MAIL_OPTIONS.auth.type,
+		clientId: config.MAIL_OPTIONS.auth.clientId,
+		clientSecret: config.MAIL_OPTIONS.auth.clientSecret
 	}
 });
 
@@ -81,7 +83,7 @@ function validePersons(persons) {
 }
 
 function validateRoom(room) {
-	let rooms = ["Zimmer 1 Herrenberg", "Zimmer 2 Bockstein", "Zimmer 3 Geisberg"];
+	let rooms = ["Zimmer Herrenberg", "Zimmer Bockstein", "Zimmer Geisberg"];
 	return rooms.indexOf(room) !== -1;
 }
 
@@ -107,12 +109,15 @@ function sendMail(res) {
 	var message = {
 		from: `${res.name} <${res.email}>`,
 		to: PENSION_BIEWER_MAIL,
+		replyTo: res.email,
 		subject: `Buchungsanfrage von ${res.name} [Von: ${res.anreise} Bis ${res.abreise}]`,
-		text: `Neue Anfrage von ${res.name} für den Zeitraum von ${res.anreise} bis ${res.abreise}.
-		
-		Gewünschtes Zimmer: ${res.zimmer}
-		Anzahl der Personen: ${res.personen}
-		Nachricht: ${res.nachricht}`
+		text: `Neue Anfrage von ${res.name} für den Zeitraum von ${res.anreise} bis ${res.abreise}.\nGewünschtes Zimmer: ${res.zimmer}\nAnzahl der Personen: ${res.personen}\nNachricht: ${res.nachricht}`,
+		auth: {
+			user: config.MAIL_OPTIONS.auth.user,
+			refreshToken: config.MAIL_OPTIONS.auth.refreshToken,
+			accessToken: config.MAIL_OPTIONS.auth.accessToken,
+			expires: config.MAIL_OPTIONS.auth.expires
+		}
 	};
 	transporter.sendMail(message, function (error) {
 		if (error) {

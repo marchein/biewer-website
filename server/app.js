@@ -157,6 +157,8 @@ app.post("/buchen", function (req, res) {
 			if (validation.isValid) {
 				booking.sendMail(validation.res);
 				logger.info("Booking mail is send");
+			} else {
+				logger.error(validation.res);
 			}
 			res.render("buchen", {
 				title: "Buchen",
