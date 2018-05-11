@@ -33,9 +33,9 @@ append content
 			.row
 				.col-md-12
 					.card-header Von 
-						strong #{obj.name} 
+						strong #{obj.name === "" ? "keine Angabe" : obj.name + " "}
 						| aus 
-						strong #{obj.ort === "" ? "keine Angabe" : obj.ort} 
+						strong #{obj.ort === "" ? "keine Angabe" : obj.ort + " "} 
 						| am 
 						strong #{obj.datum}
 					.card-body
