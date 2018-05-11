@@ -4,6 +4,7 @@ block link
 	-var selected = "Buchen";
 
 append content
+	h3.text-muted Buchungsanfrage senden
 	if message !== undefined
 		if message 
 			.alert.alert-success(role='alert')
@@ -48,4 +49,4 @@ append content
 					script(src="//www.google.com/recaptcha/api.js" async defer)
 					#captcha.g-recaptcha(data-sitekey="6LdhA1YUAAAAAAkfDJrJ4rYREXUxqi9Ewgpl9LHe")
 				.form-group
-					button.btn.btn-success.btn-block(name="submit", type="submit") Absenden
+					button.btn.btn-success.btn-block(name="submit", type="submit") Anfrage absenden
