@@ -23,16 +23,7 @@ var logger = new (winston.Logger)({
 	]
 });
 
-const transporter = nodemailer.createTransport({
-	host: config.MAIL_OPTIONS.host,
-	port: config.MAIL_OPTIONS.port,
-	secure: true,
-	auth: {
-		type: config.MAIL_OPTIONS.auth.type,
-		clientId: config.MAIL_OPTIONS.auth.clientId,
-		clientSecret: config.MAIL_OPTIONS.auth.clientSecret
-	}
-});
+const transporter = nodemailer.createTransport(config.MAIL_OPTIONS);
 
 const PENSION_BIEWER_MAIL = "pensionbiewerockfen@t-online.de";
 

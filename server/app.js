@@ -1,8 +1,8 @@
 const express = require("express");
 const session = require("express-session");
 const efp = require("express-form-post");
-var bodyParser = require("body-parser");
-var Recaptcha = require("express-recaptcha").Recaptcha;
+const bodyParser = require("body-parser");
+const Recaptcha = require("express-recaptcha").Recaptcha;
 const path = require("path");
 const winston = require("winston");
 const fs = require("fs");
@@ -15,13 +15,13 @@ const formPost = efp();
 const port = process.env.PORT || config.EXPRESS_PORT;
 const publicFolder = path.join(__dirname, "/../public");
 
-var recaptcha = new Recaptcha("6LdhA1YUAAAAAAkfDJrJ4rYREXUxqi9Ewgpl9LHe", "6LdhA1YUAAAAACWtfMOblz53SxjnJ_rtHhqBtP9g");
+const recaptcha = new Recaptcha("6LdhA1YUAAAAAAkfDJrJ4rYREXUxqi9Ewgpl9LHe", "6LdhA1YUAAAAACWtfMOblz53SxjnJ_rtHhqBtP9g");
 
 if (!fs.existsSync(config.LOG_FOLDER)) {
 	fs.mkdirSync(config.LOG_FOLDER);
 }
 
-var logger = new (winston.Logger)({
+const logger = new (winston.Logger)({
 	transports: [
 		new (winston.transports.File)({
 			name: "info-file",
@@ -126,7 +126,7 @@ app.get("/guestbook/page/:page", function (req, res) {
 });
 
 app.post("/guestbook/page/:page", function (req, res) {
-	recaptcha.verify(req, function (error, data) {
+	recaptcha.verify(req, function (error) {
 		if (!error) {
 			formPost.upload(req, res, function (err) {
 				if (err) {
@@ -144,14 +144,16 @@ app.post("/guestbook/page/:page", function (req, res) {
 });
 
 app.get("/buchen", function (req, res) {
-	res.render("buchen", {
+	/*res.render("buchen", {
 		title: "Buchen",
 		message: undefined
-	});
+	});*/
+	res.redirect("/wartung");
 });
 
 app.post("/buchen", function (req, res) {
-	recaptcha.verify(req, function (error, data) {
+	/*
+	recaptcha.verify(req, function (error) {
 		if (!error) {
 			let validation = booking.validate(req.body);
 			if (validation.isValid) {
@@ -167,7 +169,8 @@ app.post("/buchen", function (req, res) {
 		} else {
 			res.redirect("/buchen");
 		}
-	});
+	});*/
+	res.redirect("/wartung");
 });
 
 app.get("/impressum", function (req, res) {
@@ -246,7 +249,7 @@ app.get("/login", function (req, res) {
 });
 
 app.post("/login", function (req, res) {
-	recaptcha.verify(req, function (error, data) {
+	recaptcha.verify(req, function (error) {
 		if (!error) {
 			let loggedin = intern.validateLogin(req.body);
 			let sess = req.session;
@@ -274,6 +277,12 @@ app.get("/logout", function (req, res) {
 			logger.info("User logged out");
 			res.redirect("/");
 		}
+	});
+});
+
+app.get("/wartung", function (req, res) {
+	res.render("wartung", {
+		title: "Wartungsarbeiten"
 	});
 });
 
