@@ -3,12 +3,12 @@ const MAIL_OPTIONS = {
 	port: 465,
 	auth: {
 		type: "OAuth2",
-		clientId: "",
-		clientSecret: "",
-		user: "",
-		refreshToken: "",
-		accessToken: "",
-		expires: 
+		clientId: "xxx",
+		clientSecret: "xxx",
+		user: "xxx",
+		refreshToken: "xxx",
+		accessToken: "xxx",
+		expires: 123
 	}
 };
 
@@ -20,7 +20,7 @@ const USERS = [{
 const LOG_FOLDER = __dirname + "/../logs";
 const EXPRESS_PORT = 61015;
 
-const GUESTBOOK_DATA = "./server/guestbook.data";
+const GUESTBOOK_DATA = "./server/guestbook.json";
 
 module.exports = {
 	MAIL_OPTIONS,
