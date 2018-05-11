@@ -16,9 +16,18 @@ main.container {
     padding-top:15px;
 }
 
-.mynav {
+@maxHeadlineSize: 2.5rem;
+
+h1 { font-size: @maxHeadlineSize * 1; }
+h2 { font-size: @maxHeadlineSize * 0.8; }
+h3 { font-size: @maxHeadlineSize * 0.7; }
+h4 { font-size: @maxHeadlineSize * 0.6; }
+h5 { font-size: @maxHeadlineSize * 0.5; }
+h6 { font-size: @maxHeadlineSize * 0.4; }
+
+.navigation {
     background-image: url("../assets/misc/nav.jpg");
-    background-size: 100% auto;                   /* <------ */
+    background-size: 100% auto;
     background-repeat: no-repeat;
     background-position: center, top;
     height: 350px;
@@ -32,38 +41,38 @@ main.container {
 }
 
 @media (max-width: 1920px) {
-    .mynav {
+    .navigation {
         background-position: 0px -150px;   
     }
 }
 
 @media (max-width: 1800px) {
-    .mynav {
+    .navigation {
         background-position: 0px -120px;   
     }
 }
 
 @media (max-width: 1600px) {
-    .mynav {
+    .navigation {
         background-position: 0px -90px;   
     }
 }
 
 @media (max-width: 1300px) {
-    .mynav {
+    .navigation {
         background-position: 0px -60px;   
     }
 }
 
 @media (max-width: 1000px) {
-    .mynav {
+    .navigation {
         background-position: 0px -30px;   
         height: 250px;
     }
 }
 
 @media (max-width: 768px) {
-    .mynav {
+    .navigation {
         background-position: 0px 0px;   
         height: 250px;
     }
@@ -74,7 +83,7 @@ main.container {
 }
 
 @media (max-width: 650px) {
-    .mynav {
+    .navigation {
         height: 200px;
         background-position: 0px 20px;   
     }
@@ -85,7 +94,7 @@ main.container {
 }
 
 @media (max-width: 500px) {
-    .mynav {
+    .navigation {
         height: 200px;
         background-position: 0px 50px;   
     }
