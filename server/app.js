@@ -144,15 +144,14 @@ app.post("/guestbook/page/:page", function (req, res) {
 });
 
 app.get("/buchen", function (req, res) {
-	/*res.render("buchen", {
+	res.render("buchen", {
 		title: "Buchen",
 		message: undefined
-	});*/
-	res.redirect("/wartung");
+	});
+	//res.redirect("/wartung");
 });
 
 app.post("/buchen", function (req, res) {
-	/*
 	recaptcha.verify(req, function (error) {
 		if (!error) {
 			let validation = booking.validate(req.body);
@@ -169,8 +168,8 @@ app.post("/buchen", function (req, res) {
 		} else {
 			res.redirect("/buchen");
 		}
-	});*/
-	res.redirect("/wartung");
+	});
+	//res.redirect("/wartung");
 });
 
 app.get("/impressum", function (req, res) {

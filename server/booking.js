@@ -23,9 +23,15 @@ var logger = new (winston.Logger)({
 	]
 });
 
-const transporter = nodemailer.createTransport(config.MAIL_OPTIONS);
-
-const PENSION_BIEWER_MAIL = "pensionbiewerockfen@t-online.de";
+const transporter = nodemailer.createTransport({
+	host: config.MAIL_OPTIONS.host,
+	port: config.MAIL_OPTIONS.port,
+	secure: config.MAIL_OPTIONS.secure,
+	auth: {
+		user: config.MAIL_OPTIONS.auth.user,
+		pass: config.MAIL_OPTIONS.auth.pass
+	}
+});
 
 function validate(message) {
 	let nameIsValid = validateNormalText(message.name);
@@ -98,16 +104,15 @@ function parseDate(date) {
 
 function sendMail(res) {
 	var message = {
+		//from: `${res.name} <${res.email}>`,
 		from: `${res.name} <${res.email}>`,
-		to: PENSION_BIEWER_MAIL,
+		to: config.MAIL_OPTIONS.receiverMail,
 		replyTo: res.email,
 		subject: `Buchungsanfrage von ${res.name} [Von: ${res.anreise} Bis ${res.abreise}]`,
 		text: `Neue Anfrage von ${res.name} für den Zeitraum von ${res.anreise} bis ${res.abreise}.\nGewünschtes Zimmer: ${res.zimmer}\nAnzahl der Personen: ${res.personen}\nNachricht: ${res.nachricht}`,
 		auth: {
 			user: config.MAIL_OPTIONS.auth.user,
-			refreshToken: config.MAIL_OPTIONS.auth.refreshToken,
-			accessToken: config.MAIL_OPTIONS.auth.accessToken,
-			expires: config.MAIL_OPTIONS.auth.expires
+			pass: config.MAIL_OPTIONS.auth.pass
 		}
 	};
 	transporter.sendMail(message, function (error) {
