@@ -12,6 +12,7 @@ const intern = require("./intern.js");
 const config = require("./config.js");
 const app = express();
 const formPost = efp();
+const helmet = require("helmet");
 const port = process.env.PORT || config.EXPRESS_PORT;
 const publicFolder = path.join(__dirname, "/../public");
 
@@ -36,6 +37,7 @@ const logger = new (winston.Logger)({
 	]
 });
 
+app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
