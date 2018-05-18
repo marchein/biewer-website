@@ -38,6 +38,7 @@ const logger = new (winston.Logger)({
 });
 
 app.use(helmet());
+app.use(helmet.referrerPolicy({ policy: "same-origin" }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
