@@ -9,7 +9,7 @@ const fs = require("fs");
 const guestbook = require("./guestbook.js");
 const booking = require("./booking.js");
 const intern = require("./intern.js");
-const config = require("./config.js");
+const config = require("./config.js").config;
 const app = express();
 const formPost = efp();
 const helmet = require("helmet");
@@ -44,7 +44,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set("views", path.join(__dirname, "../src/views"));
 app.set("view engine", "pug");
-app.set("env", config.debugValue());
+app.set("env", config.DEBUG ? "development" : "production");
 if (app.get("env") === "development") {
 	app.locals.pretty = true;
 }

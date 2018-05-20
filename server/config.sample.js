@@ -1,42 +1,29 @@
-const MAIL_OPTIONS = {
-	host: "smtp.gmail.com",
-	port: 465,
-	auth: {
-		type: "OAuth2",
-		clientId: "xxx",
-		clientSecret: "xxx",
-		user: "xxx",
-		refreshToken: "xxx",
-		accessToken: "xxx",
-		expires: 123
-	}
+const config = {
+	MAIL_OPTIONS: {
+		host: "",
+		port: 587,
+		auth: {
+			user: "",
+			pass: ""
+		},
+		receiverMail: ""
+	},
+	USERS: [{
+		username: "user",
+		password: "hashed password"
+	}],
+	LOG_FOLDER: __dirname + "/../logs",
+	EXPRESS_PORT: 61015,
+	GUESTBOOK_DATA: "./server/guestbook.data",
+	MYSQL: {
+		host: "localhost",
+		user: "root",
+		password: "",
+		database: "biewer"
+	},
+	DEBUG: true
 };
 
-const USERS = [{
-	username: "user",
-	password: "salted password"
-}];
-
-const LOG_FOLDER = __dirname + "/../logs";
-const EXPRESS_PORT = 61015;
-
-const GUESTBOOK_DATA = "./server/guestbook.json";
-
-const DEBUG = false;
-
-function debugValue() {
-	if (DEBUG) {
-		return "development";
-	} else {
-		return "production";
-	}
-}
-
 module.exports = {
-	MAIL_OPTIONS,
-	USERS,
-	LOG_FOLDER,
-	EXPRESS_PORT,
-	GUESTBOOK_DATA,
-	debugValue
+	config
 };

@@ -1,7 +1,7 @@
 const fs = require("fs");
 const winston = require("winston");
 const nodemailer = require("nodemailer");
-const config = require("./config.js");
+const config = require("./config.js").config;
 const moment = require("moment");
 
 if (!fs.existsSync(config.LOG_FOLDER)) {
