@@ -22,10 +22,21 @@ const EXPRESS_PORT = 61015;
 
 const GUESTBOOK_DATA = "./server/guestbook.json";
 
+const DEBUG = false;
+
+function debugValue() {
+	if (DEBUG) {
+		return "development";
+	} else {
+		return "production";
+	}
+}
+
 module.exports = {
 	MAIL_OPTIONS,
 	USERS,
 	LOG_FOLDER,
 	EXPRESS_PORT,
-	GUESTBOOK_DATA
+	GUESTBOOK_DATA,
+	debugValue
 };

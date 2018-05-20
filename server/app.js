@@ -44,6 +44,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set("views", path.join(__dirname, "../src/views"));
 app.set("view engine", "pug");
+app.set("env", config.debugValue());
 if (app.get("env") === "development") {
 	app.locals.pretty = true;
 }
