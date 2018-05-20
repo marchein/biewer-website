@@ -42,6 +42,7 @@ app.use(helmet.referrerPolicy({ policy: "same-origin" }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+/*
 // csp stuff
 let sources = {
 	"default-src": ["\"self\""],
@@ -60,6 +61,7 @@ app.use(function (req, res, next) {
 	res.setHeader("Content-Security-Policy", csp.join(" "));
 	next();
 });
+*/
 
 app.set("views", path.join(__dirname, "../src/views"));
 app.set("view engine", "pug");
