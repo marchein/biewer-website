@@ -21,6 +21,10 @@ const config = {
 		password: "",
 		database: "biewer"
 	},
+	RECAPTCHA: {
+		websitekey: "",
+		secret: ""
+	},
 	DEBUG: true
 };
 

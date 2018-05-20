@@ -16,7 +16,7 @@ const helmet = require("helmet");
 const port = process.env.PORT || config.EXPRESS_PORT;
 const publicFolder = path.join(__dirname, "/../public");
 
-const recaptcha = new Recaptcha("6LdhA1YUAAAAAAkfDJrJ4rYREXUxqi9Ewgpl9LHe", "6LdhA1YUAAAAACWtfMOblz53SxjnJ_rtHhqBtP9g");
+const recaptcha = new Recaptcha(config.RECAPTCHA.websitekey, config.RECAPTCHA.secret);
 
 if (!fs.existsSync(config.LOG_FOLDER)) {
 	fs.mkdirSync(config.LOG_FOLDER);
