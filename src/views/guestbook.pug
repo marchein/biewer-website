@@ -23,7 +23,8 @@ append content
 			.form-group.col-md-12
 				label.control-label(for='captcha') Captcha
 				script(src="//www.google.com/recaptcha/api.js" async defer)
-				#captcha.g-recaptcha(data-sitekey="6LdhA1YUAAAAAAkfDJrJ4rYREXUxqi9Ewgpl9LHe")
+				#captcha.g-recaptcha(data-sitekey="6LdhA1YUAAAAAAkfDJrJ4rYREXUxqi9Ewgpl9LHe" aria-describedby="captchaHelp")
+				small#captchaHelp.form-text.text-muted Bitte bestätige, dass du ein Mensch bist.
 			.form-group.col-md-12
 				label.control-label(for='submit')
 				button#submit.btn.btn-success.btn-block(name='submit') Speichern

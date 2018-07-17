@@ -47,6 +47,7 @@ append content
 				.form-group
 					label.control-label(for='captcha') Captcha
 					script(src="//www.google.com/recaptcha/api.js" async defer)
-					#captcha.g-recaptcha(data-sitekey="6LdhA1YUAAAAAAkfDJrJ4rYREXUxqi9Ewgpl9LHe")
+					#captcha.g-recaptcha(data-sitekey="6LdhA1YUAAAAAAkfDJrJ4rYREXUxqi9Ewgpl9LHe" aria-describedby="captchaHelp")
+					small#captchaHelp.form-text.text-muted Bitte bestätige, dass du ein Mensch bist.
 				.form-group
 					button.btn.btn-success.btn-block(name="submit", type="submit") Anfrage absenden
