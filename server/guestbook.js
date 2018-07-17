@@ -55,7 +55,7 @@ function getSpecificEntrys(numberOfEntrys, startingAt) {
 }
 
 function getNewEntry(messageBody) {
-	let nextID = Object.keys(getEntrys()).length;
+	let nextID = getEntrys()[getEntrys().length - 1].id + 1;
 	addEntry(JSON.stringify({
 		id: nextID,
 		name: messageBody.name,
@@ -72,7 +72,7 @@ function addEntry(entry) {
 		} else {
 			guestbookData = JSON.parse(data); //now it an object
 			guestbookData.entrys.push(JSON.parse(entry)); //add some data
-			fs.writeFile(config.GUESTBOOK_DATA, JSON.stringify(guestbookData), "utf8", setupData); // write it back
+			fs.writeFile(config.GUESTBOOK_DATA, JSON.stringify(guestbookData, null, 4), "utf8", setupData); // write it back
 		}
 	});
 }
@@ -83,7 +83,7 @@ function deleteEntry(id) {
 		let index = validate.position;
 		if (index > -1) {
 			guestbookData.entrys.splice(index, 1);
-			fs.writeFile(config.GUESTBOOK_DATA, JSON.stringify(guestbookData), "utf8", setupData); // write it back
+			fs.writeFile(config.GUESTBOOK_DATA, JSON.stringify(guestbookData, null, 4), "utf8", setupData); // write it back
 			logger.info("Successfully deleted entry: " + id);
 		}
 	} else {
