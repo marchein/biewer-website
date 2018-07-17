@@ -1,4 +1,4 @@
-const config = require("./config.js").USERS;
+const config = require("./config.js").config.USERS;
 const bcrypt = require("bcrypt");
 
 function validateLogin(data) {
