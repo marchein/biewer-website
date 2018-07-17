@@ -1,0 +1,36 @@
+extends layout.pug
+
+block link
+	-var selected = 'Galerie';
+
+append content
+	.card.card-body
+		.card-block
+			.row
+				.col-md-12.my-auto
+					h4 Das Haus
+				- for (let i = 0; i < 6; i++ )
+						.col-xl-3.col-md-4.col-sm-6.col-xs-12.mt-3.mt-sm-3.mt-md-3.mt-lg-3
+							a(href="http://placehold.it/400x300" data-toggle="lightbox" data-title="Pension Biewer")
+									img(src="http://placehold.it/400x300").img-fluid.img-thumbnail
+	
+	.card.card-body.top3
+		.card-block
+			.row
+				.col-md-12.my-auto
+					h4 Ockfen
+				- for (let i = 0; i < 6; i++ )
+						.col-xl-3.col-md-4.col-sm-6.col-xs-12.mt-3.mt-sm-3.mt-md-3.mt-lg-3
+							a(href="http://placehold.it/400x300" data-toggle="lightbox" data-title="Pension Biewer")
+									img(src="http://placehold.it/400x300").img-fluid.img-thumbnail
+
+	.card.card-body.top3
+		.card-block
+			.row
+				.col-md-12.my-auto
+					h4 Umgebung um Ockfen 
+				- for (let i = 0; i < 6; i++ )
+						.col-xl-3.col-md-4.col-sm-6.col-xs-12.mt-3.mt-sm-3.mt-md-3.mt-lg-3
+							a(href="http://placehold.it/400x300" data-toggle="lightbox" data-title="Pension Biewer")
+									img(src="http://placehold.it/400x300").img-fluid.img-thumbnail
+				

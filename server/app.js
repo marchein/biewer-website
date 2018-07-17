@@ -99,9 +99,9 @@ app.get("/zimmer", function (req, res) {
 	});
 });
 
-app.get("/umgebung", function (req, res) {
-	res.render("umgebung", {
-		title: "Umgebung"
+app.get("/galerie", function (req, res) {
+	res.render("galerie", {
+		title: "Galerie"
 	});
 });
 
