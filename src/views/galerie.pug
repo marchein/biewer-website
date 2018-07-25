@@ -1,0 +1,68 @@
+extends layout.pug
+
+block link
+	-var selected = 'Galerie';
+
+append content
+	- var imageFolder = "static/assets/gallery/"
+	-
+		const images = {
+			house: {
+				0: "haus.jpg",
+				1: "IMG_2028.jpg",
+				2: "IMG_2018.jpg"
+			},
+			ockfen: {
+				0: "IMG_0840.jpg",
+				1: "IMG_1831.jpg",
+				2: "IMG_1804.jpg",
+				3: "IMG_1922.jpg",
+				4: "IMG_1884.jpg"
+			},
+			umgebung: {
+				0: "IMG_1808.jpg",
+				1: "IMG_1824.jpg",
+				2: "IMG_1851.jpg",
+				3: "IMG_1858.jpg",
+				4: "IMG_1848.jpg",
+				5: "IMG_1869.jpg",
+				6: "IMG_1933.jpg",
+				7: "IMG_1930.jpg",
+				8: "IMG_1929.jpg",
+				9: "IMG_1924.jpg",
+				10: "IMG_1928.jpg",
+				11: "IMG_1874.jpg",
+				12: "IMG_1878.jpg"
+			}
+		};
+
+	.card.card-body
+		.card-block
+			.row
+				.col-md-12.my-auto
+					h4 Das Haus
+				each obj, index in images.house
+						.col-xl-3.col-md-4.col-sm-6.col-xs-12.mt-3.mt-sm-3.mt-md-3.mt-lg-3
+							a(href=imageFolder + "fullsize/" + obj data-toggle="lightbox" data-title="Pension Biewer")
+									img(src=imageFolder + "thumb/" + obj).img-fluid.img-thumbnail
+	
+	.card.card-body.top3
+		.card-block
+			.row
+				.col-md-12.my-auto
+					h4 Ockfen
+				each obj, index in images.ockfen
+						.col-xl-3.col-md-4.col-sm-6.col-xs-12.mt-3.mt-sm-3.mt-md-3.mt-lg-3
+							a(href=imageFolder + "fullsize/" + obj data-toggle="lightbox" data-title="Pension Biewer")
+									img(src=imageFolder + "thumb/" + obj).img-fluid.img-thumbnail
+
+	.card.card-body.top3
+		.card-block
+			.row
+				.col-md-12.my-auto
+					h4 Umgebung um Ockfen 
+				each obj, index in images.umgebung
+						.col-xl-3.col-md-4.col-sm-6.col-xs-12.mt-3.mt-sm-3.mt-md-3.mt-lg-3
+							a(href=imageFolder + "fullsize/" + obj data-toggle="lightbox" data-title="Pension Biewer")
+									img(src=imageFolder + "thumb/" + obj).img-fluid.img-thumbnail
+				
