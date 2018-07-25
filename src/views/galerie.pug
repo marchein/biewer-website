@@ -8,90 +8,31 @@ append content
 	-
 		const images = {
 			house: {
-				0: {
-					file: "IMG_2028.jpg",
-					text: ""
-				},
-				1: {
-					file: "IMG_2018.jpg",
-					text: "Placeholder 1"
-				}
+				0: "haus.jpg",
+				1: "IMG_2028.jpg",
+				2: "IMG_2018.jpg"
 			},
 			ockfen: {
-				0: {
-					file: "IMG_0840.jpg",
-					text: "Placeholder 2"
-				},
-				1: {
-					file: "IMG_1831.jpg",
-					text: ""
-				},
-				2: {
-					file: "IMG_1804.jpg",
-					text: ""
-				}, 
-				3: {
-					file: "IMG_1922.jpg",
-					text: ""
-				},
-				4: {
-					file: "IMG_1884.jpg",
-					text: ""
-				}
+				0: "IMG_0840.jpg",
+				1: "IMG_1831.jpg",
+				2: "IMG_1804.jpg",
+				3: "IMG_1922.jpg",
+				4: "IMG_1884.jpg"
 			},
 			umgebung: {
-				0: {
-					file: "IMG_1808.jpg",
-					text: "Placeholder 3"
-				},
-				1: {
-					file: "IMG_1824.jpg",
-					text: ""
-				},
-				2: {
-					file: "IMG_1851.jpg",
-					text: ""
-				},
-				3: {
-					file: "IMG_1858.jpg",
-					text: ""
-				},
-				4: {
-					file: "IMG_1848.jpg",
-					text: ""
-				},
-				5: {
-					file: "IMG_1869.jpg",
-					text: ""
-				},
-				6: {
-					file: "IMG_1933.jpg",
-					text: ""
-				},
-				7: {
-					file: "IMG_1930.jpg",
-					text: ""
-				},
-				8: {
-					file: "IMG_1929.jpg",
-					text: ""
-				},
-				9: {
-					file: "IMG_1924.jpg",
-					text: ""
-				},
-				10: {
-					file: "IMG_1928.jpg",
-					text: ""
-				},
-				11: {
-					file: "IMG_1874.jpg",
-					text: ""
-				},
-				12: {
-					file: "IMG_1878.jpg",
-					text: ""
-				}
+				0: "IMG_1808.jpg",
+				1: "IMG_1824.jpg",
+				2: "IMG_1851.jpg",
+				3: "IMG_1858.jpg",
+				4: "IMG_1848.jpg",
+				5: "IMG_1869.jpg",
+				6: "IMG_1933.jpg",
+				7: "IMG_1930.jpg",
+				8: "IMG_1929.jpg",
+				9: "IMG_1924.jpg",
+				10: "IMG_1928.jpg",
+				11: "IMG_1874.jpg",
+				12: "IMG_1878.jpg"
 			}
 		};
 
@@ -102,8 +43,8 @@ append content
 					h4 Das Haus
 				each obj, index in images.house
 						.col-xl-3.col-md-4.col-sm-6.col-xs-12.mt-3.mt-sm-3.mt-md-3.mt-lg-3
-							a(href=imageFolder + "fullsize/" + obj.file data-toggle="lightbox" data-title=obj.text)
-									img(src=imageFolder + "thumb/" + obj.file).img-fluid.img-thumbnail
+							a(href=imageFolder + "fullsize/" + obj data-toggle="lightbox" data-title="Pension Biewer")
+									img(src=imageFolder + "thumb/" + obj).img-fluid.img-thumbnail
 	
 	.card.card-body.top3
 		.card-block
@@ -112,8 +53,8 @@ append content
 					h4 Ockfen
 				each obj, index in images.ockfen
 						.col-xl-3.col-md-4.col-sm-6.col-xs-12.mt-3.mt-sm-3.mt-md-3.mt-lg-3
-							a(href=imageFolder + "fullsize/" + obj.file data-toggle="lightbox" data-title=obj.text)
-									img(src=imageFolder + "thumb/" + obj.file).img-fluid.img-thumbnail
+							a(href=imageFolder + "fullsize/" + obj data-toggle="lightbox" data-title="Pension Biewer")
+									img(src=imageFolder + "thumb/" + obj).img-fluid.img-thumbnail
 
 	.card.card-body.top3
 		.card-block
@@ -122,6 +63,6 @@ append content
 					h4 Umgebung um Ockfen 
 				each obj, index in images.umgebung
 						.col-xl-3.col-md-4.col-sm-6.col-xs-12.mt-3.mt-sm-3.mt-md-3.mt-lg-3
-							a(href=imageFolder + "fullsize/" + obj.file data-toggle="lightbox" data-title=obj.text)
-									img(src=imageFolder + "thumb/" + obj.file).img-fluid.img-thumbnail
+							a(href=imageFolder + "fullsize/" + obj data-toggle="lightbox" data-title="Pension Biewer")
+									img(src=imageFolder + "thumb/" + obj).img-fluid.img-thumbnail
 				
