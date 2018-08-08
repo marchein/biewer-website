@@ -56,10 +56,6 @@ app.use((req, res, next) => {
 			title: "Pension Biewer",
 			currentYear: "2017 - " + (new Date()).getFullYear(),
 		},
-		author: {
-			name: "Marc Hein",
-			site: "//marc-hein.de"
-		},
 		owner: {
 			name: "Pension Biewer",
 			site: "//pension-biewer.de"
