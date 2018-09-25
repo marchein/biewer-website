@@ -23,24 +23,26 @@ append content
 				.form-group
 					label.control-label.requiredField(for="email") E-Mail
 					input#email.form-control(name="email", placeholder="Ihre E-Mail Adresse", type="email" required)
-				.form-group
-					label.control-label.requiredField(for="anreise") Gewünschte Anreise
-					input#anreise.form-control.date(name="anreise", placeholder="Tag.Monat.Jahr", type="date" required)
-				.form-group
-					label.control-label.requiredField(for="abreise") Gewünschte Abreise
-					input#abreise.form-control(name="abreise", placeholder="Tag.Monat.Jahr", type="date" required)
-				.form-group
-					label.control-label.requiredField(for="personen") Anzahl der Personen
-					select#personen.select.form-control(name="personen")
-						option(value="1") 1 Person
-						- for (let i = 2; i <= 6; i++ )
-							option(value=i) #{i} Personen
-				.form-group
-					label.control-label.requiredField(for="zimmer") Welches Zimmer bevorzugen Sie?
-					select#zimmer.select.form-control(name="zimmer")
-						option(value="Zimmer Herrenberg") Zimmer Herrenberg
-						option(value="Zimmer Bockstein") Zimmer Bockstein
-						option(value="Zimmer Geisberg") Zimmer Geisberg
+				.form-row
+					.form-group.col-md-6
+						label.control-label.requiredField(for="anreise") Gewünschte Anreise
+						input#anreise.form-control.date(name="anreise", placeholder="Tag.Monat.Jahr", type="date" required)
+					.form-group.col-md-6
+						label.control-label.requiredField(for="abreise") Gewünschte Abreise
+						input#abreise.form-control(name="abreise", placeholder="Tag.Monat.Jahr", type="date" required)
+				.form-row
+					.form-group.col-md-6
+						label.control-label.requiredField(for="personen") Anzahl der Personen
+						select#personen.select.form-control(name="personen")
+							option(value="1") 1 Person
+							- for (let i = 2; i <= 6; i++ )
+								option(value=i) #{i} Personen
+					.form-group.col-md-6
+						label.control-label.requiredField(for="zimmer") Welches Zimmer bevorzugen Sie?
+						select#zimmer.select.form-control(name="zimmer")
+							option(value="Zimmer Herrenberg") Zimmer Herrenberg
+							option(value="Zimmer Bockstein") Zimmer Bockstein
+							option(value="Zimmer Geisberg") Zimmer Geisberg
 				.form-group
 					label.control-label.requiredField(for="message") Nachricht
 					textarea#message.form-control(cols="40", name="message", placeholder="Ihre Nachricht", rows="10")
