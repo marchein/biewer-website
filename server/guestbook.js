@@ -71,8 +71,14 @@ function addEntry(entry) {
 			logger.error(err);
 		} else {
 			guestbookData = JSON.parse(data); //now it an object
-			guestbookData.entrys.push(JSON.parse(entry)); //add some data
-			fs.writeFile(config.GUESTBOOK_DATA, JSON.stringify(guestbookData, null, 4), "utf8", setupData); // write it back
+			let newEntry = JSON.parse(entry);
+			if (!newEntry.nachricht.includes("href")) {
+				guestbookData.entrys.push(newEntry); //add some data
+				fs.writeFile(config.GUESTBOOK_DATA, JSON.stringify(guestbookData, null, 4), "utf8", setupData); // write it back
+				logger.info("Successfully added entry: " + newEntry.id);
+			} else {
+				logger.error("Not allowed content! " + newEntry);
+			}
 		}
 	});
 }
