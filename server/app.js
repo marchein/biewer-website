@@ -54,7 +54,7 @@ app.use((req, res, next) => {
 	res.locals = {
 		site: {
 			title: "Pension Biewer",
-			currentYear: "2017 - " + (new Date()).getFullYear(),
+			currentYear: new Date().getFullYear(),
 		},
 		owner: {
 			name: "Pension Biewer",
