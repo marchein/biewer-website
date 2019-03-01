@@ -8,8 +8,8 @@
 		"css": "mkdir -p public/style && lessc src/style/style.less public/css/style.css",
 		"js": "mkdir -p public/js && cp node_modules/bootstrap/dist/js/bootstrap.min.js public/js/bootstrap.min.js && browserify src/js/main.js -o public/js/main.js",
 		"img": "mkdir -p public/assets && cp -R src/assets/* public/assets/",
-		"minify": "minify public/js/main.js > public/js/main.min.js && rm public/js/main.js && mv public/js/main.min.js public/js/main.js && mkdir -p public/style && lessc --clean-css src/style/style.less public/css/style.css",
-		"dependencies": "cp node_modules/bootstrap/dist/css/bootstrap.min.css public/css/bootstrap.min.css && cp node_modules/bootstrap/dist/js/bootstrap.min.js public/js/bootstrap.min.js && cp node_modules/jquery/dist/jquery.slim.min.js public/js/jquery.slim.min.js && cp node_modules/popper.js/dist/umd/popper.min.js public/js/popper.min.js && mkdir -p public/fonts && cp -R node_modules/font-awesome/fonts/* public/fonts && cp node_modules/font-awesome/css/font-awesome.min.css public/css/font-awesome.min.css && cp node_modules/ekko-lightbox/dist/ekko-lightbox.css public/css/ekko-lightbox.css && cp node_modules/ekko-lightbox/dist/ekko-lightbox.js public/js/ekko-lightbox.js && cp node_modules/bootstrap-confirmation2/dist/bootstrap-confirmation.min.js public/js/bootstrap-confirmation.min.js && cp node_modules/cookieconsent/build/cookieconsent.min.js public/js/cookieconsent.min.js && cp node_modules/cookieconsent/build/cookieconsent.min.css public/css/cookieconsent.min.css",
+		"minify": "minify public/js/main.js > public/js/main.min.js && rm public/js/main.js && mv public/js/main.min.js public/js/main.js && mkdir -p public/style",
+		"dependencies": "cp node_modules/bootstrap/dist/css/bootstrap.min.css public/css/bootstrap.min.css && cp node_modules/bootstrap/dist/js/bootstrap.min.js public/js/bootstrap.min.js && cp node_modules/jquery/dist/jquery.slim.min.js public/js/jquery.slim.min.js && cp node_modules/popper.js/dist/umd/popper.min.js public/js/popper.min.js && mkdir -p public/fonts && cp -R node_modules/font-awesome/fonts/* public/fonts && cp node_modules/font-awesome/css/font-awesome.min.css public/css/font-awesome.min.css && cp node_modules/ekko-lightbox/dist/ekko-lightbox.css public/css/ekko-lightbox.css && cp node_modules/ekko-lightbox/dist/ekko-lightbox.js public/js/ekko-lightbox.js && cp node_modules/cookieconsent/build/cookieconsent.min.js public/js/cookieconsent.min.js && cp node_modules/cookieconsent/build/cookieconsent.min.css public/css/cookieconsent.min.css",
 		"clean": "rm -rf node_modules && rm -rf public",
 		"build": "npm run debug && npm run minify",
 		"debug": "npm run lint && npm run css && npm run js && npm run img && npm run dependencies",
@@ -18,9 +18,8 @@
 	"author": "Marc Hein",
 	"license": "ISC",
 	"dependencies": {
-		"bcrypt": "^3.0.2",
+		"bcrypt": "^3.0.4",
 		"body-parser": "^1.18.3",
-		"bootstrap-confirmation2": "^4.0.2",
 		"browserify": "^16.2.3",
 		"cookieconsent": "^3.1.0",
 		"ekko-lightbox": "^5.3.0",
@@ -29,21 +28,20 @@
 		"express-recaptcha": "^4.1.1",
 		"express-session": "^1.15.6",
 		"font-awesome": "^4.7.0",
-		"helmet": "^3.15.0",
+		"helmet": "^3.15.1",
 		"jquery": "^3.3.1",
-		"moment": "^2.23.0",
-		"nodemailer": "^4.7.0",
-		"popper.js": "^1.14.6",
+		"moment": "^2.24.0",
+		"nodemailer": "^5.1.1",
+		"popper.js": "^1.14.7",
 		"pug": "^2.0.3",
-		"winston": "^2.4.4"
+		"winston": "^3.2.1"
 	},
 	"devDependencies": {
-		"babel-minify": "^0.4.3",
-		"bootstrap": "^4.1.3",
-		"eslint": "^4.19.1",
+		"babel-minify": "^0.5.0",
+		"bootstrap": "^4.3.1",
+		"eslint": "^5.14.1",
 		"invariant": "^2.2.4",
-		"less": "^3.9.0",
-		"less-plugin-clean-css": "^1.5.1"
+		"less": "^3.9.0"
 	},
 	"repository": {
 		"type": "git",

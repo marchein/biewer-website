@@ -22,7 +22,7 @@ if (!fs.existsSync(config.LOG_FOLDER)) {
 	fs.mkdirSync(config.LOG_FOLDER);
 }
 
-const logger = new (winston.Logger)({
+const logger = winston.createLogger({
 	transports: [
 		new (winston.transports.File)({
 			name: "info-file",
