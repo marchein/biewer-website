@@ -9,7 +9,7 @@
 		"js": "mkdir -p public/js && cp node_modules/bootstrap/dist/js/bootstrap.min.js public/js/bootstrap.min.js && browserify src/js/main.js -o public/js/main.js",
 		"img": "mkdir -p public/assets && cp -R src/assets/* public/assets/",
 		"minify": "minify public/js/main.js > public/js/main.min.js && rm public/js/main.js && mv public/js/main.min.js public/js/main.js && mkdir -p public/style",
-		"dependencies": "cp node_modules/bootstrap/dist/css/bootstrap.min.css public/css/bootstrap.min.css && cp node_modules/bootstrap/dist/js/bootstrap.min.js public/js/bootstrap.min.js && cp node_modules/jquery/dist/jquery.slim.min.js public/js/jquery.slim.min.js && cp node_modules/popper.js/dist/umd/popper.min.js public/js/popper.min.js && mkdir -p public/fonts && cp -R node_modules/font-awesome/fonts/* public/fonts && cp node_modules/font-awesome/css/font-awesome.min.css public/css/font-awesome.min.css && cp node_modules/ekko-lightbox/dist/ekko-lightbox.css public/css/ekko-lightbox.css && cp node_modules/ekko-lightbox/dist/ekko-lightbox.js public/js/ekko-lightbox.js && cp node_modules/cookieconsent/build/cookieconsent.min.js public/js/cookieconsent.min.js && cp node_modules/cookieconsent/build/cookieconsent.min.css public/css/cookieconsent.min.css",
+		"dependencies": "cp node_modules/bootstrap/dist/css/bootstrap.min.css public/css/bootstrap.min.css && cp node_modules/bootstrap/dist/js/bootstrap.min.js public/js/bootstrap.min.js && cp node_modules/jquery/dist/jquery.slim.min.js public/js/jquery.slim.min.js && cp node_modules/popper.js/dist/umd/popper.min.js public/js/popper.min.js && mkdir -p public/fonts && cp -R node_modules/font-awesome/fonts/* public/fonts && cp node_modules/font-awesome/css/font-awesome.min.css public/css/font-awesome.min.css && cp node_modules/ekko-lightbox/dist/ekko-lightbox.css public/css/ekko-lightbox.css && cp node_modules/ekko-lightbox/dist/ekko-lightbox.js public/js/ekko-lightbox.js && cp node_modules/cookieconsent/build/cookieconsent.min.js public/js/cookieconsent.min.js && cp node_modules/cookieconsent/build/cookieconsent.min.css public/css/cookieconsent.min.css && cp node_modules/bootbox/dist/bootbox.min.js public/js/bootbox.min.js && cp node_modules/bootbox/dist/bootbox.locales.min.js public/js/bootstrap.locales.js",
 		"clean": "rm -rf node_modules && rm -rf public",
 		"build": "npm run debug && npm run minify",
 		"debug": "npm run lint && npm run css && npm run js && npm run img && npm run dependencies",
@@ -20,6 +20,7 @@
 	"dependencies": {
 		"bcrypt": "^3.0.4",
 		"body-parser": "^1.18.3",
+		"bootbox": "github:makeusabrew/bootbox#v5.0.0",
 		"browserify": "^16.2.3",
 		"cookieconsent": "^3.1.0",
 		"ekko-lightbox": "^5.3.0",
