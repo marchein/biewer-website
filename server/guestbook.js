@@ -84,11 +84,9 @@ function addEntry(entry) {
 }
 
 function isAllowed(entry) {
-	console.log(entry);
-	if (entry.name.length == 0 || entry.ort.length == 0 || entry.nachricht.length < 10) {
-		return false
+	if (entry.name.length === 0 || entry.ort.length === 0 || entry.nachricht.length < 10) {
+		return false;
 	}
-	
 	let forbiddenWords = ["href", "http", "https", "buy", ".com", "newsletter"];
 	var hasForbiddenWord = false;
 	for (let word of forbiddenWords) {
