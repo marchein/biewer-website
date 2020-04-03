@@ -72,15 +72,32 @@ function addEntry(entry) {
 		} else {
 			guestbookData = JSON.parse(data); //now it an object
 			let newEntry = JSON.parse(entry);
-			if (!newEntry.nachricht.includes("href")) {
+			if (isAllowed(newEntry)) {
 				guestbookData.entrys.push(newEntry); //add some data
 				fs.writeFile(config.GUESTBOOK_DATA, JSON.stringify(guestbookData, null, 4), "utf8", setupData); // write it back
 				logger.info("Successfully added entry: " + newEntry.id);
 			} else {
-				logger.error("Not allowed content! " + newEntry);
+				logger.error("Not allowed content! Name: " + newEntry.name + " Ort: " + newEntry.ort + " Nachricht: " + newEntry.nachricht);
 			}
 		}
 	});
+}
+
+function isAllowed(entry) {
+	console.log(entry);
+	if (entry.name.length == 0 || entry.ort.length == 0 || entry.nachricht.length < 10) {
+		return false
+	}
+	
+	let forbiddenWords = ["href", "http", "https", "buy", ".com", "newsletter"];
+	var hasForbiddenWord = false;
+	for (let word of forbiddenWords) {
+		if (entry.name.includes(word) || entry.ort.includes(word) || entry.nachricht.includes(word)) {
+			hasForbiddenWord = true;
+			break;
+		}
+	}
+	return !hasForbiddenWord;
 }
 
 function deleteEntry(id) {
