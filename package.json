@@ -30,7 +30,7 @@
 		"express-session": "^1.16.2",
 		"font-awesome": "^4.7.0",
 		"helmet": "^3.21.0",
-		"jquery": "^3.4.1",
+		"jquery": "^3.5.0",
 		"moment": "^2.24.0",
 		"nodemailer": "^5.1.1",
 		"popper.js": "^1.15.0",
