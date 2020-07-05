@@ -9,16 +9,24 @@ if (!fs.existsSync(config.LOG_FOLDER)) {
 }
 
 var logger = winston.createLogger({
+	format: winston.format.combine(
+		winston.format.timestamp({
+			format: "DD.MM.YYYY - HH:mm:ss"
+		}),
+		winston.format.printf(info => `[${info.timestamp}] - [${info.level}]: ${info.message}`)
+	),
 	transports: [
 		new (winston.transports.File)({
 			name: "info-file",
 			filename: config.LOG_FOLDER + "/server.log",
-			level: "info"
+			level: "info",
+			timestamp: true
 		}),
 		new (winston.transports.File)({
 			name: "error-file",
 			filename: config.LOG_FOLDER + "/errors.log",
-			level: "error"
+			level: "error",
+			timestamp: true
 		})
 	]
 });
@@ -106,7 +114,8 @@ function sendMail(res) {
 	var message = {
 		//from: `${res.name} <${res.email}>`,
 		from: `${res.name} <${res.email}>`,
-		to: config.MAIL_OPTIONS.receiverMail,
+		//to: config.MAIL_OPTIONS.receiverMail,
+		to: "dev@marc-hein.de",
 		replyTo: res.email,
 		subject: `Buchungsanfrage von ${res.name} [Von: ${res.anreise} Bis ${res.abreise}]`,
 		text: `Neue Anfrage von ${res.name} für den Zeitraum von ${res.anreise} bis ${res.abreise}.\nGewünschtes Zimmer: ${res.zimmer}\nAnzahl der Personen: ${res.personen}\nNachricht: ${res.nachricht}`,
@@ -118,6 +127,8 @@ function sendMail(res) {
 	transporter.sendMail(message, function (error) {
 		if (error) {
 			logger.error(error);
+		} else {
+			logger.info(`Booking mail is send: sender: ${res.name} (${res.email}) timeframe: ${res.anreise} - ${res.abreise}, room: ${res.zimmer}, number of people: ${res.personen}, message: ${res.nachricht.replace(/\n|\r/g, " ")}`);
 		}
 	});
 }

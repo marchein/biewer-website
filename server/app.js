@@ -23,16 +23,24 @@ if (!fs.existsSync(config.LOG_FOLDER)) {
 }
 
 const logger = winston.createLogger({
+	format: winston.format.combine(
+		winston.format.timestamp({
+			format: "DD.MM.YYYY - HH:mm:ss"
+		}),
+		winston.format.printf(info => `[${info.timestamp}] - [${info.level}]: ${info.message}`)
+	),
 	transports: [
 		new (winston.transports.File)({
 			name: "info-file",
 			filename: config.LOG_FOLDER + "/server.log",
-			level: "info"
+			level: "info",
+			timestamp: true
 		}),
 		new (winston.transports.File)({
 			name: "error-file",
 			filename: config.LOG_FOLDER + "/errors.log",
-			level: "error"
+			level: "error",
+			timestamp: true
 		})
 	]
 });
@@ -157,7 +165,6 @@ app.post("/buchen", function (req, res) {
 			let validation = booking.validate(req.body);
 			if (validation.isValid) {
 				booking.sendMail(validation.res);
-				logger.info("Booking mail is send");
 			} else {
 				logger.error(validation.res);
 			}

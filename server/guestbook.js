@@ -12,16 +12,24 @@ if (!fs.existsSync(config.LOG_FOLDER)) {
 }
 
 var logger = winston.createLogger({
+	format: winston.format.combine(
+		winston.format.timestamp({
+			format: "DD.MM.YYYY - HH:mm:ss"
+		}),
+		winston.format.printf(info => `[${info.timestamp}] - [${info.level}]: ${info.message}`)
+	),
 	transports: [
 		new (winston.transports.File)({
 			name: "info-file",
 			filename: config.LOG_FOLDER + "/server.log",
-			level: "info"
+			level: "info",
+			timestamp: true
 		}),
 		new (winston.transports.File)({
 			name: "error-file",
 			filename: config.LOG_FOLDER + "/errors.log",
-			level: "error"
+			level: "error",
+			timestamp: true
 		})
 	]
 });
@@ -75,9 +83,9 @@ function addEntry(entry) {
 			if (isAllowed(newEntry)) {
 				guestbookData.entrys.push(newEntry); //add some data
 				fs.writeFile(config.GUESTBOOK_DATA, JSON.stringify(guestbookData, null, 4), "utf8", setupData); // write it back
-				logger.info("Successfully added entry: " + newEntry.id);
+				logger.info(`Successfully added entry from ${newEntry.name} with id: ${newEntry.id}`);
 			} else {
-				logger.error("Not allowed content! Name: " + newEntry.name + " Ort: " + newEntry.ort + " Nachricht: " + newEntry.nachricht);
+				logger.error(`Not allowed content! Name: ${newEntry.name} Ort: ${newEntry.ort} Nachricht: ${newEntry.nachricht}`);
 			}
 		}
 	});
