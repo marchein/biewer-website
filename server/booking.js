@@ -114,8 +114,7 @@ function sendMail(res) {
 	var message = {
 		//from: `${res.name} <${res.email}>`,
 		from: `${res.name} <${res.email}>`,
-		//to: config.MAIL_OPTIONS.receiverMail,
-		to: "dev@marc-hein.de",
+		to: config.MAIL_OPTIONS.receiverMail,
 		replyTo: res.email,
 		subject: `Buchungsanfrage von ${res.name} [Von: ${res.anreise} Bis ${res.abreise}]`,
 		text: `Neue Anfrage von ${res.name} für den Zeitraum von ${res.anreise} bis ${res.abreise}.\nGewünschtes Zimmer: ${res.zimmer}\nAnzahl der Personen: ${res.personen}\nNachricht: ${res.nachricht}`,
