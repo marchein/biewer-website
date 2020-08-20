@@ -18,7 +18,7 @@
 	"author": "Marc Hein",
 	"license": "ISC",
 	"dependencies": {
-		"bcrypt": "^3.0.6",
+		"bcrypt": "^5.0.0",
 		"body-parser": "^1.19.0",
 		"bootbox": "github:makeusabrew/bootbox#v5.0.0",
 		"browserify": "^16.5.0",
