@@ -18,10 +18,10 @@
 	"author": "Marc Hein",
 	"license": "ISC",
 	"dependencies": {
-		"bcrypt": "^3.0.6",
+		"bcrypt": "^5.0.0",
 		"body-parser": "^1.19.0",
 		"bootbox": "github:makeusabrew/bootbox#v5.0.0",
-		"browserify": "^16.5.0",
+		"browserify": "^16.5.2",
 		"cookieconsent": "^3.1.1",
 		"ekko-lightbox": "^5.3.0",
 		"express": "^4.17.1",
@@ -39,10 +39,10 @@
 		"winston": "^3.3.3"
 	},
 	"devDependencies": {
-		"bootstrap": "^4.5.0",
+		"bootstrap": "^4.5.2",
 		"eslint": "^5.16.0",
 		"invariant": "^2.2.4",
-		"less": "^3.11.3"
+		"less": "^3.12.2"
 	},
 	"repository": {
 		"type": "git",
