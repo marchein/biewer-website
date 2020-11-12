@@ -3,3 +3,4 @@
 server/config.js
 server/data
 logs/
+/.nova

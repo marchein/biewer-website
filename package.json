@@ -31,7 +31,7 @@
 		"font-awesome": "^4.7.0",
 		"helmet": "^3.23.3",
 		"jquery": "^3.4.1",
-		"moment": "^2.27.0",
+		"moment": "^2.29.1",
 		"nodemailer": "^5.1.1",
 		"popper.js": "^1.15.0",
 		"pug": "^2.0.4",
@@ -39,7 +39,7 @@
 		"winston": "^3.3.3"
 	},
 	"devDependencies": {
-		"bootstrap": "^4.5.2",
+		"bootstrap": "^4.5.3",
 		"eslint": "^5.16.0",
 		"invariant": "^2.2.4",
 		"less": "^3.12.2"

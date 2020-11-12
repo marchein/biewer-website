@@ -141,11 +141,9 @@ app.post("/guestbook/page/:page", function (req, res) {
 					logger.error(err);
 				}
 				guestbook.getNewEntry(req.body);
-				logger.info("Added new guestbook entry");
 				res.redirect("/guestbook");
 			});
 		} else {
-			logger.error("Recaptcha failed");
 			res.redirect("/guestbook");
 		}
 	});
