@@ -1,15 +1,10 @@
 const moment = require("moment");
 
-let marcEmail = document.getElementsByClassName("marc-mail")[0];
-if (marcEmail !== undefined) {
-	let mail = "kontakt@marc-hein.de";
-	marcEmail.href = "mailto:" + mail;
-	marcEmail.textContent = mail;
-}
-
 let biewerEmail = document.getElementsByClassName("biewer-mail")[0];
 if (biewerEmail !== undefined) {
-	let mail = "pensionbiewerockfen@t-online.de";
+	let name = "kontakt";
+	let domain = "pension-biewer.de";
+	let mail = name + "@" + domain;
 	biewerEmail.href = "mailto:" + mail;
 	biewerEmail.textContent = mail;
 }
