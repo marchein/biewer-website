@@ -32,7 +32,7 @@
 		"helmet": "^3.23.3",
 		"jquery": "^3.4.1",
 		"moment": "^2.29.1",
-		"nodemailer": "^6.4.16",
+		"nodemailer": "^6.6.1",
 		"popper.js": "^1.15.0",
 		"pug": "^3.0.1",
 		"terser": "^4.8.0",
