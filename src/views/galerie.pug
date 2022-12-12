@@ -4,7 +4,7 @@ block link
 	-var selected = 'Galerie';
 
 append content
-	- var imageFolder = "static/assets/gallery/"
+	- var imageFolder = "assets/gallery/"
 	-
 		const images = {
 			house: {
@@ -36,33 +36,27 @@ append content
 			}
 		};
 
-	.card.card-body
-		.card-block
-			.row
-				.col-md-12.my-auto
-					h4 Das Haus
-				each obj, index in images.house
-						.col-xl-3.col-md-4.col-sm-6.col-xs-12.mt-3.mt-sm-3.mt-md-3.mt-lg-3
-							a(href=imageFolder + "fullsize/" + obj data-toggle="lightbox" data-title="Pension Biewer")
-									img(src=imageFolder + "thumb/" + obj).img-fluid.img-thumbnail
-	
-	.card.card-body.top3
-		.card-block
-			.row
-				.col-md-12.my-auto
-					h4 Ockfen
-				each obj, index in images.ockfen
-						.col-xl-3.col-md-4.col-sm-6.col-xs-12.mt-3.mt-sm-3.mt-md-3.mt-lg-3
-							a(href=imageFolder + "fullsize/" + obj data-toggle="lightbox" data-title="Pension Biewer")
-									img(src=imageFolder + "thumb/" + obj).img-fluid.img-thumbnail
+	.row
+		.col-md-12.my-auto
+			h2.mb-3 Das Haus
+		each obj, index in images.house
+				.col-xl-3.col-md-4.col-sm-6.col-xs-12.mb-3
+					a(href=imageFolder + "fullsize/" + obj data-toggle="lightbox" data-title="Pension Biewer")
+							img(src=imageFolder + "thumb/" + obj).img-fluid.img-thumbnail
+	.row
+		.col-md-12.my-auto
+			h2.mb-3 Ockfen
+		each obj, index in images.ockfen
+				.col-xl-3.col-md-4.col-sm-6.col-xs-12.mb-3
+					a(href=imageFolder + "fullsize/" + obj data-toggle="lightbox" data-title="Pension Biewer")
+							img(src=imageFolder + "thumb/" + obj).img-fluid.img-thumbnail
 
-	.card.card-body.top3
-		.card-block
-			.row
-				.col-md-12.my-auto
-					h4 Umgebung um Ockfen 
-				each obj, index in images.umgebung
-						.col-xl-3.col-md-4.col-sm-6.col-xs-12.mt-3.mt-sm-3.mt-md-3.mt-lg-3
-							a(href=imageFolder + "fullsize/" + obj data-toggle="lightbox" data-title="Pension Biewer")
-									img(src=imageFolder + "thumb/" + obj).img-fluid.img-thumbnail
-				
+	.row
+		.col-md-12.my-auto
+			h2.mb-3 Umgebung um Ockfen
+		each obj, index in images.umgebung
+				.col-xl-3.col-md-4.col-sm-6.col-xs-12.mb-3
+					a(href=imageFolder + "fullsize/" + obj data-toggle="lightbox" data-title="Pension Biewer")
+							img(src=imageFolder + "thumb/" + obj).img-fluid.img-thumbnail
+
+	include partials/book-cta

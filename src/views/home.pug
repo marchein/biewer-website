@@ -1,88 +1,77 @@
 extends layout.pug
 
-append content
-	.card.card-body
-		.card-block
-			.row
-				.col-lg-8.my-auto
-					h4 Pension Biewer
-						i.fa.fa-star
-						i.fa.fa-star
-						i.fa.fa-star
-						i.fa.fa-star
-					h3.text-muted „Das Wohlfühlhaus“
-					p In unserem Haus mit familiärer Gastlichkeit werden Sie sich sofort wohlfühlen und Ihren wohlverdienten Urlaub in vollen Zügen genießen können.
-						br
-						| Unser Haus liegt in einer verkehrsberuhigten Zone mit Aussicht auf Weinberge und Hänge mit Wiesen und Weiden.
-					ul.list-unstyled
-						li PKW Parkplatz am Haus.
-						li Abgeschlossener Raum für Fahrräder.
-				.col-lg-4
-					a(href="static/assets/gallery/fullsize/haus.jpg" data-toggle="lightbox" data-title="Pension Biewer")
-						img(src="static/assets/gallery/thumb/haus.jpg").img-fluid.img-thumbnail
-	.card.top3.card-body
-		.card-block
-			.row
-				.col-lg-4.order-12.order-lg-1
-					a(href="static/assets/rooms/zimmer2/fullsize/zimmer_2_bockstein_4.jpg" data-toggle="lightbox" data-title="Pension Biewer")
-						img(src="static/assets/rooms/zimmer2/thumb/zimmer_2_bockstein_4.jpg").img-fluid.img-thumbnail
-				.col-lg-8.my-auto.order-1.order-lg-12
-					p Wir verfügen über 3 Komfortzimmer, die mit Bad, Dusche WC, Föhn und Kosmetikspiegel ausgestattet sind. Zu jedem Zimmer (ca. 28 m²) gehört eine gemütliche Wohnecke mit kostenlosem WLAN, SAT-TV, Radio, Kühlschrank, Wasserkocher, Trinkgläser usw.
+block content
+	.row
+		.col-lg-8.my-auto
+			h1 Pension Biewer
+				.text-muted „Das Wohlfühlhaus“
+			p In unserem Haus mit familiärer Gastlichkeit werden Sie sich sofort wohlfühlen und Ihren wohlverdienten Urlaub in vollen Zügen genießen können.
+				br
+				| Unser Haus liegt in einer verkehrsberuhigten Zone mit Aussicht auf Weinberge und Hänge mit Wiesen und Weiden.
+			ul.list-unstyled
+				li PKW Parkplatz am Haus.
+				li Abgeschlossener Raum für Fahrräder.
+		.col-lg-4
+			a(href="assets/gallery/fullsize/haus.jpg" data-toggle="lightbox" data-title="Pension Biewer")
+				img(src="assets/gallery/thumb/haus.jpg").img-fluid.img-thumbnail
 
-	.card.top3.card-body
-		.card-block
+	include partials/book-cta
+
+	.row.mb-3
+		.col-12
+			h2 Zimmer
+		.col-lg-4.order-12.order-lg-1
+			a(href="assets/rooms/zimmer2/fullsize/zimmer_2_bockstein_4.jpg" data-toggle="lightbox" data-title="Pension Biewer")
+				img(src="assets/rooms/zimmer2/thumb/zimmer_2_bockstein_4.jpg").img-fluid.img-thumbnail
+		.col-lg-8.my-auto.order-1.order-lg-12
+			p Wir verfügen über 3 Komfortzimmer, die mit Bad, Dusche WC, Föhn und Kosmetikspiegel ausgestattet sind. Zu jedem Zimmer (ca. 28 m²) gehört eine gemütliche Wohnecke mit kostenlosem WLAN, SAT-TV, Radio, Kühlschrank, Wasserkocher, Trinkgläser usw.
+			a.btn.btn-secondary.btn-lg(href='/zimmer') Weitere Bilder der <strong>Zimmer</strong>
+
+
+	.row.mb-3
+		.col-12
+			h2 Gemeinsam nutzbare Bereiche
+		.col-lg-6
+			a(href="assets/rooms/fruehstueck/fullsize/fruehstuecks_raum_1.jpg" data-toggle="lightbox" data-title="Pension Biewer")
+						img(src="assets/rooms/fruehstueck/thumb/fruehstuecks_raum_1.jpg").img-fluid.img-thumbnail
+			p.mt-3 In unserem Frühstücksraum erwartet Sie täglich ein reich gedeckter Tisch. Hier können Sie in Ruhe genießen und die Kunst, gut zu Frühstücken, neu entdecken.
+		.col-lg-6
+			a(href="assets/rooms/terrasse/fullsize/terrasse_1.jpg" data-toggle="lightbox" data-title="Pension Biewer")
+						img(src="assets/rooms/terrasse/thumb/terrasse_1.jpg").img-fluid.img-thumbnail
+			p.mt-3 Unsere blumenreiche Terrasse (teilweise überdacht) ist der passende Ort zum Entspannen (hier darf geraucht werden).
+
+	.row.mb-3
+		.col-12
+			h2.mb-0 Aktivitäten
+			p Nach dem Frühstück können sie zu unterschiedlichen lokalen Aktivitäten starten starten.
+			h3.h5.mb-1 Zu Fuß
+			p Zum #[a(href="//ockfen-home.de/") Ockfener] Bachtal mit der Weiher- und Freizeitanlage In die umliegenden Weinberge und Wälder.
+			h3.h5.mb-1 Per Fahrrad
+			p Nach #[a(href="//saarburg.de/") Saarburg], #[a(href="//www.mettlach.de/") Mettlach] der Saar entlang oder bis nach #[a(href="//trier.de/") Trier] an der Mosel. Ein ausgebautes Radwegenetz entlang der Flüsse ermöglicht Ihnen ein erholsames weil müheloses Radeln.
+			h3.h5.mb-1 Per PKW
+			p Nach #[a(href="//lcto.lu/de/index") Luxemburg] oder #[a(href="//tourisme-metz.com/de/startseite.html") Metz] (Frankreich) ca. 1 Std. Fahrt.
+
+
+	.row
+		.col-xl-4.col-md-6.col-sm-12.my-auto
+			h2 Preise
+			p Doppelzimmer ab 75€
+				br
+				|	Einzelzimmer auf Anfrage
+				br
+				| <span class="small">(Preis pro Zimmer und Tag)</span>
+		.col-xl-8.col-md-6.col-sm-12
+			h2 Kontaktadresse
 			.row
-				.col-lg-6.form-group
-					a(href="static/assets/rooms/fruehstueck/fullsize/fruehstuecks_raum_1.jpg" data-toggle="lightbox" data-title="Pension Biewer")
-								img(src="static/assets/rooms/fruehstueck/thumb/fruehstuecks_raum_1.jpg").img-fluid.img-thumbnail
-					p.mt-3 In unserem Frühstücksraum erwartet Sie täglich ein reich gedeckter Tisch. Hier können Sie in Ruhe genießen und die Kunst, gut zu Frühstücken, neu entdecken.
-				.col-lg-6.form-group
-					a(href="static/assets/rooms/terrasse/fullsize/terrasse_1.jpg" data-toggle="lightbox" data-title="Pension Biewer")
-								img(src="static/assets/rooms/terrasse/thumb/terrasse_1.jpg").img-fluid.img-thumbnail
-					p.mt-3 Unsere blumenreiche Terrasse (teilweise überdacht) ist der passende Ort zum Entspannen (hier darf geraucht werden).
-	.card.top3.card-body
-		.card-block
-			.row
-				.col-md-12
-					p
-						strong Nach dem Frühstück können sie dann starten:
-			.row
-				.col-md-2
-					p Zu Fuß:
-				.col-md-10
-					p Zum #[a(href="//ockfen-home.de/") Ockfener] Bachtal mit der Weiher- und Freizeitanlage In die umliegenden Weinberge und Wälder.
-			.row
-				.col-md-2
-					p Per Rad:
-				.col-md-10
-					p Nach #[a(href="//saarburg.de/") Saarburg], #[a(href="//www.mettlach.de/") Mettlach] der Saar entlang oder bis nach #[a(href="//trier.de/") Trier] an der Mosel. Ein ausgebautes Radwegenetz entlang der Flüsse ermöglicht Ihnen ein erholsames weil müheloses Radeln.
-			.row
-				.col-md-2
-					p Per PKW:
-				.col-md-10
-					p Nach #[a(href="//lcto.lu/de/index") Luxemburg] oder #[a(href="//tourisme-metz.com/de/startseite.html") Metz] (Frankreich) ca. 1 Std. Fahrt.
-	.card.top3.card-body
-		.card-block
-			.row
-				.col-xl-4.col-md-6.col-sm-12.my-auto
-					p Preise:
-					p pro Tag:
+				.col-xl-6
+					p.m-0 Pension Biewer
 						br
-						| je Doppelzimmer ab 70€
+						| Herrenbergstraße 19
 						br
-						| Einzelzimmer ab 60€
-				.col-xl-8.col-md-6.col-sm-12
-					p Kontaktadresse:
-					.row
-						.col-xl-6
-							p Pension Biewer
-								br
-								| Herrenbergstraße 19
-								br
-								| 54441 Ockfen
-						.col-xl-6
-							p Telefon +49 (0) 6581 40 43
-								br
-								| Fax: +49 (0) 6581 92 31 13
-								br
-								| E-Mail: #[a(href="#").biewer-mail Bitte Javascript aktivieren]
+						| 54441 Ockfen
+				.col-xl-6
+					p.m-0 Telefon +49 (0) 6581 40 43
+						br
+						| Fax: +49 (0) 6581 92 31 13
+						br
+						| E-Mail: #[a(href="#").biewer-mail Bitte Javascript aktivieren]

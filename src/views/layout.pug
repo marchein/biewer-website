@@ -1,52 +1,45 @@
 doctype html
-html(lang='de') 
+html(lang='de')
 	block link
 		-var selected = 'Startseite';
-	-var menu = { 'Startseite': '/', 'Zimmer': '/zimmer','Galerie': '/galerie', 'Buchen': '/buchen', 'Gästebuch': '/guestbook'};
+	-var menu = { 'Startseite': '/', 'Zimmer': '/zimmer','Galerie': '/galerie'};
+	-var title = selected;
 	head
 		meta(name="viewport" content="width=device-width, initial-scale=1 viewport-fit=cover")
 		meta(name="referrer" content="no-referrer")
 		title #{title} - Pension Biewer Ockfen
-		link(href='/static/css/bootstrap.min.css', rel='stylesheet')
-		link(href='/static/css/font-awesome.min.css', rel='stylesheet')
-		link(href='/static/css/ekko-lightbox.css', rel='stylesheet')
-		link(href='/static/css/cookieconsent.min.css', rel='stylesheet')
-		link(href='/static/css/style.css', rel='stylesheet')
-		link(rel="shortcut icon" href="/static/assets/favicon.ico" type="image/x-icon")
-		link(rel="icon" href="/static/assets/favicon.ico" type="image/x-icon")
+		link(href='/style/bundled.css', rel='stylesheet')
+		link(rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon")
+		link(rel="icon" href="/assets/favicon.ico" type="image/x-icon")
 		block head
 	body
 		.navigation
-			nav.navbar.navbar-expand-md.navbar-dark
+			nav.navbar.navbar-expand-lg.navbar-dark
 				.container
-					a.navbar-brand(href="/") #{owner.name} 
-						i.fa.fa-star
-						i.fa.fa-star
-						i.fa.fa-star
-						i.fa.fa-star
-					button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation") 
-						span.navbar-toggler-icon
-					.collapse.navbar-collapse#navbar
-						ul.navbar-nav
+					a.navbar-brand(href="/") Pension Biewer&nbsp;
+							i.fa.fa-star
+							i.fa.fa-star
+							i.fa.fa-star
+							i.fa.fa-star
+					button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation")
+						.navbar-toggler-icon
+					.collapse.navbar-collapse(id="navbarNav")
+						ul.navbar-nav.ms-auto
 							each val, key in menu
-								if selected === key
-									li.nav-item.active
-										a.nav-link(href=val)=key
-								else
-									li.nav-item
-										a.nav-link(href=val)=key
-		main.container
+									if selected === key
+										li.nav-item.active
+											a.nav-link(href=val)=key
+									else
+										li.nav-item
+											a.nav-link(href=val)=key
+		main.container.pt-3
 			block content
 				h1 #{title}
 		block footer
-		footer.text-center
+		footer.text-center.py-3
 			.container
-				p.my-auto #[a(href="/impressum") Impressum] - #[a(href="/datenschutz") Datenschutz] - #[a(href="/login") Intern]
-				p.my-auto &copy; #{site.currentYear} #[a(href=owner.site) #{owner.name}]
-		script(src="/static/js/jquery.slim.min.js")
-		script(src="/static/js/popper.min.js")
-		script(src="/static/js/bootstrap.min.js")
-		script(src="/static/js/ekko-lightbox.js")
-		script(src="/static/js/cookieconsent.min.js")
-		script(src="/static/js/main.js")
+				p.mb-0 #[a(href="/impressum") Impressum] - #[a(href="/datenschutz") Datenschutz]
+				p.mb-0 &copy; 2022 #[a(href="https://pension-biewer.de") Pension Biewer]
+		script(src="/js/bootstrap.bundle.min.js")
+		script(src="/js/main.js")
 		block scripts
