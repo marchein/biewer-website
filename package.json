@@ -5,20 +5,20 @@
 	"main": "server/Main.js",
 	"scripts": {
 		"create-domain-link": "mkdir -p dist && echo 'pension-biewer.de' > dist/CNAME",
-		"predeploy": "rm -rf dist && npm run build && npm run create-domain-link",
+		"predeploy": "rm -rf dist && npm run dependencies && npm run build && npm run create-domain-link",
 		"deploy": "gh-pages -d dist",
 		"server": "nodemon server/main.js -e ejs,js,css,html,jpg,png,scss",
 		"lint": "eslint -c ./.eslintrc.json src/js/**.js && eslint -c ./.eslintrc.json server/**.js",
 		"style": "mkdir -p dist/style && lessc src/style/style.less dist/style/style.css && npm run concat-style && npm run minify-style",
-		"concat-style": "find dist/style/ -type f -not -name 'bundled.css' -not -name 'bootstrap.min.css.map' -exec cat {} \\; > dist/style/bundled.css",
+		"concat-style": "find dist/style/ -type f -not -name 'bundled.css' -not -name 'bootstrap.min.css' -exec cat {} \\; > dist/style/bundled.css",
 		"minify-style": "cd dist/style && css-minify -f bundled.css -o . && rm bundled.css && mv bundled.min.css bundled.css",
 		"clean-styles": "cd dist/style && find . -type f | grep -iv bundled.css | xargs rm && npm run minify-style",
 		"js": "mkdir -p dist/js && browserify src/js/Main.js | uglifyjs > dist/js/main.js",
-		"build": "npm run style && npm run js && npm run html && npm run img",
+		"build": "npm run style && npm run js && npm run html && npm run img && npm run fonts",
 		"html": "mkdir -p dist && npm run pug",
 		"pug": "pug3 -P src/views/home.pug && mv src/views/home.html dist/index.html && pug3 -P src/views/impressum.pug && mv src/views/impressum.html dist/impressum.html && pug3 -P src/views/datenschutz.pug && mv src/views/datenschutz.html dist/datenschutz.html && pug3 -P src/views/galerie.pug && mv src/views/galerie.html dist/galerie.html && pug3 -P src/views/zimmer.pug && mv src/views/zimmer.html dist/zimmer.html",
 		"img": "mkdir -p dist/assets && cp -R src/assets/* dist/assets/",
-		"dependencies": "mkdir -p dist/style && mkdir -p dist/js && cp node_modules/bootstrap/dist/css/*.css* dist/style && cp node_modules/bootstrap/dist/js/*.js* dist/js",
+		"dependencies": "mkdir -p dist/style && mkdir -p dist/js && mkdir -p dist/webfonts && cp node_modules/@fortawesome/fontawesome-free/css/all.min.css dist/style/font-awesome.min.css && cp -R node_modules/@fortawesome/fontawesome-free/webfonts/* dist/webfonts && cp node_modules/bootstrap/dist/css/*.css dist/style && cp node_modules/bootstrap/dist/js/*.js dist/js && rm dist/style/bootstrap-* dist/style/bootstrap.rtl.*",
 		"clean": "rm -rf node_modules && rm -rf dist",
 		"debug": "npm run build && npm run server",
 		"start": "node ."
@@ -27,7 +27,8 @@
 	"license": "ISC",
 	"dependencies": {
 		"bootstrap": "^5.2.2",
-		"bs5-lightbox": "^1.8.2"
+		"bs5-lightbox": "^1.8.2",
+		"@fortawesome/fontawesome-free": "^5.15.4"
 	},
 	"devDependencies": {
 		"@anduh/pug-cli": "^1.0.0-alpha8",
